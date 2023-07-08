@@ -1,0 +1,159 @@
+[gd_scene load_steps=12 format=3 uid="uid://cuuioc2ggmksk"]
+
+[ext_resource type="Texture2D" uid="uid://bwk2x1nmn1lkw" path="res://Models/SecurityDoor/SecurityDoor_streaky-metal1_albedo.png" id="1_p0l3j"]
+[ext_resource type="Texture2D" uid="uid://cja2s6bxt8ra0" path="res://Models/SecurityDoor/SecurityDoor_streaky-metal1_metallic-streaky-metal1_roughness.png" id="2_5iym2"]
+[ext_resource type="Texture2D" uid="uid://bp2ldlpkyvypi" path="res://Models/SecurityDoor/SecurityDoor_CautionBorder.png" id="3_2ai0h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_whkvv"]
+size = Vector3(0.297917, 2.54706, 1.34251)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxtlt"]
+resource_name = "DoorMetal"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_p0l3j")
+metallic = 1.0
+metallic_texture = ExtResource("2_5iym2")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_5iym2")
+roughness_texture_channel = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s2wxq"]
+resource_name = "Material.002"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_2ai0h")
+metallic = 0.3
+roughness = 0.6
+uv1_scale = Vector3(0.397, 0.381, 0.425)
+uv1_offset = Vector3(1.052, 1.288, -0.497)
+uv1_triplanar = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ibp80"]
+_surfaces = [{
+"aabb": AABB(-1, -0.77849, -1, 2, 1.7785, 2.00001),
+"format": 4097,
+"index_count": 30,
+"index_data": PackedByteArray(4, 0, 1, 0, 0, 0, 4, 0, 5, 0, 1, 0, 5, 0, 3, 0, 1, 0, 5, 0, 6, 0, 3, 0, 6, 0, 2, 0, 3, 0, 6, 0, 7, 0, 2, 0, 7, 0, 0, 0, 2, 0, 7, 0, 4, 0, 0, 0, 3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"name": "DoorMetal",
+"primitive": 3,
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 63, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 191, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 191, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 63)
+}, {
+"aabb": AABB(-1, -1, -1, 2, 0.22151, 2.00001),
+"format": 4097,
+"index_count": 30,
+"index_data": PackedByteArray(1, 0, 2, 0, 3, 0, 1, 0, 0, 0, 2, 0, 2, 0, 4, 0, 7, 0, 2, 0, 0, 0, 4, 0, 3, 0, 7, 0, 6, 0, 3, 0, 2, 0, 7, 0, 1, 0, 6, 0, 5, 0, 1, 0, 3, 0, 6, 0, 0, 0, 5, 0, 4, 0, 0, 0, 1, 0, 5, 0),
+"name": "Material.002",
+"primitive": 3,
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 63, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 191, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 191, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 63)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l6tgp"]
+resource_name = "SecurityDoor_Cube013"
+_surfaces = [{
+"aabb": AABB(-1, -0.77849, -1, 2, 1.7785, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 32, 63, 0, 0, 128, 63, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 96, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 96, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 48, 20, 213, 62, 0, 0, 128, 63, 48, 20, 213, 62, 0, 0, 0, 0, 48, 20, 213, 62, 0, 0, 64, 63, 48, 20, 213, 62, 0, 0, 64, 63, 48, 20, 213, 62, 0, 0, 0, 63, 48, 20, 213, 62, 0, 0, 0, 63, 48, 20, 213, 62, 0, 0, 128, 62, 48, 20, 213, 62, 0, 0, 128, 62),
+"format": 4119,
+"index_count": 30,
+"index_data": PackedByteArray(12, 0, 3, 0, 0, 0, 12, 0, 14, 0, 3, 0, 15, 0, 9, 0, 4, 0, 15, 0, 16, 0, 9, 0, 17, 0, 8, 0, 11, 0, 17, 0, 19, 0, 8, 0, 18, 0, 1, 0, 6, 0, 18, 0, 13, 0, 1, 0, 10, 0, 2, 0, 5, 0, 10, 0, 7, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_gxtlt"),
+"name": "DoorMetal",
+"primitive": 3,
+"vertex_count": 20,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 63, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 191, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 63, 255, 255, 255, 127, 255, 127, 255, 255)
+}, {
+"aabb": AABB(-1, -1, -1, 2, 0.22151, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 192, 62, 0, 0, 128, 63, 238, 31, 118, 63, 154, 234, 194, 62, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 64, 63, 86, 19, 188, 60, 154, 234, 194, 62, 0, 0, 192, 62, 0, 0, 64, 63, 229, 31, 118, 63, 111, 193, 29, 63, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 86, 19, 188, 60, 111, 193, 29, 63, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 0, 63, 48, 20, 213, 62, 0, 0, 128, 63, 48, 20, 213, 62, 0, 0, 0, 0, 48, 20, 213, 62, 0, 0, 64, 63, 48, 20, 213, 62, 0, 0, 64, 63, 48, 20, 213, 62, 0, 0, 0, 63, 48, 20, 213, 62, 0, 0, 0, 63, 48, 20, 213, 62, 0, 0, 128, 62, 48, 20, 213, 62, 0, 0, 128, 62),
+"format": 4119,
+"index_count": 30,
+"index_data": PackedByteArray(4, 0, 6, 0, 9, 0, 4, 0, 1, 0, 6, 0, 7, 0, 13, 0, 18, 0, 7, 0, 2, 0, 13, 0, 11, 0, 19, 0, 17, 0, 11, 0, 8, 0, 19, 0, 5, 0, 16, 0, 15, 0, 5, 0, 10, 0, 16, 0, 0, 0, 14, 0, 12, 0, 0, 0, 3, 0, 14, 0),
+"material": SubResource("StandardMaterial3D_s2wxq"),
+"name": "Material.002",
+"primitive": 3,
+"vertex_count": 20,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 63, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 191, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 32, 75, 71, 191, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 32, 75, 71, 191, 0, 0, 128, 63, 255, 255, 255, 127, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ibp80")
+
+[sub_resource type="Animation" id="Animation_4rnq4"]
+resource_name = "Close"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(2.94703, -0.25, 0, 0.1, -0.44226, 0.55, 0, -0.123, 0, 0.0158857, 0.55, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.5)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorAnim:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.75, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_qn8q8"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2.94703, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorAnim:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.75]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e5l0b"]
+_data = {
+"Close": SubResource("Animation_4rnq4"),
+"RESET": SubResource("Animation_qn8q8")
+}
+
+[node name="SecurityDoorRight" type="StaticBody3D"]
+transform = Transform3D(1.04, 0, 0, 0, 1.04, 0, 0, 0, 1.04, 2.025, 2.94703, 2.325)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_whkvv")
+
+[node name="SecurityDoor" type="Node3D" parent="."]
+transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, 0, -0.48, 0.014)
+
+[node name="Cube018" type="MeshInstance3D" parent="SecurityDoor"]
+transform = Transform3D(1.00555, 0, 8.88178e-16, 0, 1.89024, 0, 0, 0, 0.156589, 0, 0, 0)
+mesh = SubResource("ArrayMesh_l6tgp")
+skeleton = NodePath("")
+
+[node name="DoorAnim" type="AnimationPlayer" parent="."]
+speed_scale = 1.75
+libraries = {
+"": SubResource("AnimationLibrary_e5l0b")
+}

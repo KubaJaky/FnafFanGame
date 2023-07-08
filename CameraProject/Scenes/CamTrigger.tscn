@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://gukrhllthe7v"]
+
+[ext_resource type="Script" path="res://Scripts/CamTrigger.gd" id="1_urnkq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xw1t"]
+size = Vector3(0.0774703, 0.0565232, 0.347976)
+
+[node name="CamTrigger01" type="StaticBody3D" groups=["Useable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0369221, 0.402689, 0)
+script = ExtResource("1_urnkq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00223392, 0.00223392, 0)
+shape = SubResource("BoxShape3D_2xw1t")

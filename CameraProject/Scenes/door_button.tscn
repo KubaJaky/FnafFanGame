@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://vhloqdepje0j"]
+
+[ext_resource type="Script" path="res://Scripts/DoorButton.gd" id="1_am6ic"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eepvg"]
+size = Vector3(0.214978, 0.322475, 0.306563)
+
+[node name="LeftDoorButton" type="StaticBody3D" groups=["Useable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.91698, 0.223568, 3.40767)
+script = ExtResource("1_am6ic")
+left = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0503502, -0.0156014)
+shape = SubResource("BoxShape3D_eepvg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112115, 0.0401819, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+shadow_enabled = true
+omni_range = 1.0
