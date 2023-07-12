@@ -3,6 +3,7 @@ extends StaticBody3D
 @onready var move_cd = $MoveCD
 @onready var attack_cd = $AttackCD
 @onready var move_wait = $MoveWait
+@onready var return_wait = $ReturnWait
 
 @onready var cam_monitor = $"../Monitor1"
 #@onready var body = $BonnieModel
@@ -10,8 +11,8 @@ extends StaticBody3D
 @onready var guitar = $BonnieModel/Armature/Skeleton3D/Cube009/Cube009
 @onready var animation_player = $BonnieModel/AnimationPlayer
 
-@onready var pos_pupil_l = $BonnieModel/Armature/Skeleton3D/Icosphere020/PupilL
-@onready var pos_pupil_r = $BonnieModel/Armature/Skeleton3D/Icosphere032/PupilR
+#@onready var pos_pupil_l = $BonnieModel/Armature/Skeleton3D/Icosphere020/PupilL
+#@onready var pos_pupil_r = $BonnieModel/Armature/Skeleton3D/Icosphere032/PupilR
 @onready var pupil_l = $PupilL
 @onready var pupil_r = $PupilR
 
@@ -23,20 +24,29 @@ extends StaticBody3D
 var PositionCameras = [0,1,2,3,7]
 var CurrentPosition = 0
 
+var was_seen := false
 var ready_to_attack := false
 
-var agression = 15
+var agression = 20
+var insanity_inrease = 0.5
 
 func _physics_process(delta):
 	if ready_to_attack:
 		if OfficeState.left_door_closed and !attack_cd.paused:
 			attack_cd.set_paused(true)
+			return_wait.set_paused(false)
 		elif !OfficeState.left_door_closed and attack_cd.paused:
 			attack_cd.set_paused(false)
+			return_wait.set_paused(true)
 			
 	if CurrentPosition == positions.size() - 1:
-		if OfficeState.flashlight_on and OfficeState.looking_left:
+		if OfficeState.flashlight_on and OfficeState.looking_left and !OfficeState.left_door_closed:
 			body.visible = true
+			if !was_seen:
+				OfficeState.insanity += insanity_inrease * 10
+				was_seen = true
+			else:
+				OfficeState.insanity += insanity_inrease
 		else:
 			body.visible = false
 			
@@ -47,12 +57,10 @@ func _on_move_cd_timeout():
 	#print("Bonnie - Movement Opportunity")
 	var move_chance = randi_range(1,20)
 	if agression >= move_chance:
-		if CurrentPosition == positions.size() - 1:
-			move_cd.stop()
-			ready_to_attack = true
-			attack_cd.start()
-		elif CurrentPosition == positions.size() - 2 and OfficeState.looking_left == true:
-			pass
+		if CurrentPosition == positions.size() - 2 and OfficeState.looking_left == true or CurrentPosition == positions.size() - 2 and OfficeState.left_door_occupied == true:
+			print("Bonnie - Blocked")
+			print("Bonnie - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_left == true)
+			print("Bonnie - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.left_door_occupied == true)
 		else:
 			var choose_room
 			if CurrentPosition == 1:
@@ -73,20 +81,26 @@ func _on_move_wait_timeout():
 		
 func move():
 	print("Bonnie - Moved")
+	if CurrentPosition == positions.size() - 1:
+			move_cd.stop()
+			OfficeState.left_door_occupied = true
+			ready_to_attack = true
+			attack_cd.start()
+			return_wait.start()
+			return_wait.set_paused(true)
 	if CurrentPosition != 0 and guitar.visible:
 		guitar.visible = false
 	global_position = positions[CurrentPosition].global_position
 	rotation = positions[CurrentPosition].rotation
 	animation_player.play(position_names[CurrentPosition])
 	
-func disrupt_camera(move):
+func disrupt_camera(room_move):
 	if OfficeState.in_cameras:
-		print(CurrentPosition, " ", positions.size() - 1)
-		if CurrentPosition == positions.size() - 1:
+		if CurrentPosition == PositionCameras.size() - 1:
 			if OfficeState.CurrentCamera == PositionCameras[CurrentPosition]:
 				cam_monitor.lose_signal()
 		else:
-			if OfficeState.CurrentCamera == PositionCameras[CurrentPosition] or OfficeState.CurrentCamera == PositionCameras[CurrentPosition + move]:
+			if OfficeState.CurrentCamera == PositionCameras[CurrentPosition] or OfficeState.CurrentCamera == PositionCameras[CurrentPosition + room_move]:
 				cam_monitor.lose_signal()
 	
 func jumpscare():
@@ -95,3 +109,13 @@ func jumpscare():
 func _on_attack_cd_timeout():
 	jumpscare()
 
+func _on_return_wait_timeout():
+	print("Bonnie - Reset")
+	attack_cd.stop()
+	ready_to_attack = false
+	OfficeState.left_door_occupied = false
+	CurrentPosition = 1
+	was_seen = false
+	move_wait.start()
+	disrupt_camera(0)
+	move_cd.start()
