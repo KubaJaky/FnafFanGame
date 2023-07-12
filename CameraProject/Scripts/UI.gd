@@ -10,6 +10,10 @@ extends CanvasLayer
 @onready var right_door_anim = $"../SecurityDoorRight/DoorAnim"
 @onready var left_door_anim = $"../SecurityDoorLeft/DoorAnim"
 @onready var eyes_anim = $Eyes
+@onready var pulsing = $Pulsing
+@onready var beat_sound = $HeartBeat
+
+var insane := false
 
 func _physics_process(delta):
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
@@ -31,6 +35,13 @@ func _physics_process(delta):
 		eyes_anim.play_backwards("CloseEyes")
 		
 	insanity_overlay.self_modulate = Color(1,1,1,OfficeState.insanity/100)
+	beat_sound.volume_db = OfficeState.insanity/10
+	
+	if OfficeState.insanity >= 25 and !insane:
+		insane = true
+		pulsing.play("Beat1")
+	elif OfficeState.insanity <= 0:
+		insane = false
 	
 func _on_panel_mouse_entered():
 	if !OfficeState.in_cameras:
@@ -56,3 +67,14 @@ func toggle_eye_close():
 	else:
 		OfficeState.eyes_closed = true
 			
+func check_beat():
+	if insane:
+		if OfficeState.insanity >= 25 and OfficeState.insanity < 50:
+			pulsing.play("Beat1")
+		if OfficeState.insanity >= 50 and OfficeState.insanity < 75:
+			pulsing.play("Beat2")
+		elif OfficeState.insanity >= 75:
+			pulsing.play("Beat3")
+	else:
+		pulsing.stop()
+	
