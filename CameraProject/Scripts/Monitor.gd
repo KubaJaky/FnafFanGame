@@ -34,7 +34,7 @@ func change_cam(cam_num):
 	  ' + str(CurrentCamera+1)
 			
 func use():
-	if can_use and !Input.is_action_pressed("CalmDown") and !OfficeState.eyes_closed:
+	if can_use and !Input.is_action_pressed("CalmDown") and !OfficeState.eyes_closed and OfficeState.power_on:
 		if Power == false:
 			AnimPlayer.play("On-Off")
 			Power = true

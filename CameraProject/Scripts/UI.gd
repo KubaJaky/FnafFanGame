@@ -18,7 +18,7 @@ var insane := false
 func _physics_process(delta):
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
 	
-	if Input.is_action_pressed("Flashlight") and !OfficeState.in_cameras:
+	if Input.is_action_pressed("Flashlight") and !OfficeState.in_cameras and !OfficeState.in_fusebox:
 		OfficeState.flashlight_on = true
 	else:
 		OfficeState.flashlight_on = false

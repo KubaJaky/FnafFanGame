@@ -22,12 +22,12 @@ extends StaticBody3D
 @onready var positions = bonnie_positions.get_children()
 
 var PositionCameras = [0,1,2,3,7]
-var CurrentPosition = 0
+var CurrentPosition = 15
 
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 20
+var agression = 0
 var insanity_inrease = 0.5
 
 func _physics_process(delta):
@@ -40,13 +40,14 @@ func _physics_process(delta):
 			return_wait.set_paused(true)
 			
 	if CurrentPosition == positions.size() - 1:
-		if OfficeState.flashlight_on and OfficeState.looking_left and !OfficeState.left_door_closed:
+		if OfficeState.flashlight_on and OfficeState.looking_left:
 			body.visible = true
-			if !was_seen:
-				OfficeState.insanity += insanity_inrease * 10
-				was_seen = true
-			else:
-				OfficeState.insanity += insanity_inrease
+			if !OfficeState.left_door_closed:
+				if !was_seen:
+					OfficeState.insanity += insanity_inrease * 10
+					was_seen = true
+				else:
+					OfficeState.insanity += insanity_inrease
 		else:
 			body.visible = false
 			
@@ -114,6 +115,7 @@ func _on_return_wait_timeout():
 	attack_cd.stop()
 	ready_to_attack = false
 	OfficeState.left_door_occupied = false
+	body.visible = true
 	CurrentPosition = 1
 	was_seen = false
 	move_wait.start()

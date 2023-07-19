@@ -22,12 +22,12 @@ extends StaticBody3D
 @onready var positions = chica_positions.get_children()
 
 var PositionCameras = [0,1,5,4,8,9]
-var CurrentPosition = 0
+var CurrentPosition = 7
 
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 20
+var agression = 0
 var insanity_inrease = 0.5
 
 func _physics_process(delta):
@@ -40,13 +40,14 @@ func _physics_process(delta):
 			return_wait.set_paused(true)
 			
 	if CurrentPosition == positions.size() - 1:
-		if OfficeState.flashlight_on and OfficeState.looking_right and !OfficeState.right_door_closed:
+		if OfficeState.flashlight_on and OfficeState.looking_right:
 			body.visible = true
-			if !was_seen:
-				OfficeState.insanity += insanity_inrease * 10
-				was_seen = true
-			else:
-				OfficeState.insanity += insanity_inrease
+			if !OfficeState.left_door_closed:
+				if !was_seen:
+					OfficeState.insanity += insanity_inrease * 10
+					was_seen = true
+				else:
+					OfficeState.insanity += insanity_inrease
 		else:
 			body.visible = false
 			
@@ -58,7 +59,9 @@ func _on_move_cd_timeout():
 	var move_chance = randi_range(1,20)
 	if agression >= move_chance:
 		if CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true or CurrentPosition == positions.size() - 2 and OfficeState.right_door_occupied == true:
-			pass
+			print("Chica - Blocked")
+			print("Chica - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true)
+			print("Chica - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.right_door_occupied == true)
 		else:
 			var choose_room
 			if CurrentPosition == 1 or CurrentPosition == 4:
@@ -112,6 +115,7 @@ func _on_return_wait_timeout():
 	attack_cd.stop()
 	ready_to_attack = false
 	OfficeState.right_door_occupied = false
+	body.visible = true
 	CurrentPosition = 1
 	was_seen = false
 	move_wait.start()

@@ -2,11 +2,15 @@ extends Node
 
 var flashlight_on := false
 var in_cameras := false
+var in_fusebox := false
 var eyes_closed := false
+
+var power_on := true
+var switches_down := 0
 
 var insanity := 0.0
 
-var CurrentCamera = 0
+var CurrentCamera := 0
 
 var looking_left := false
 var looking_right := false

@@ -20,12 +20,12 @@ extends StaticBody3D
 @onready var endo_positions = $"../EndoPositions"
 @onready var positions = endo_positions.get_children()
 
-var CurrentPosition = 0
+var CurrentPosition = 7
 
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 20
+var agression = 0
 var insanity_inrease = 1
 
 func _physics_process(delta):
@@ -40,13 +40,14 @@ func _physics_process(delta):
 			print(return_wait.paused, " - ", return_wait.time_left)
 			
 	if CurrentPosition == positions.size() - 1:
-		if OfficeState.flashlight_on and OfficeState.looking_left and !OfficeState.left_door_closed:
+		if OfficeState.flashlight_on and OfficeState.looking_left:
 			body.visible = true
-			if !was_seen:
-				OfficeState.insanity += insanity_inrease * 10
-				was_seen = true
-			else:
-				OfficeState.insanity += insanity_inrease
+			if !OfficeState.left_door_closed:
+				if !was_seen:
+					OfficeState.insanity += insanity_inrease * 10
+					was_seen = true
+				else:
+					OfficeState.insanity += insanity_inrease
 		else:
 			body.visible = false
 			
