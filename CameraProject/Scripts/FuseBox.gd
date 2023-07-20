@@ -1,13 +1,17 @@
 extends StaticBody3D
 
+@onready var power_down_sound = $PowerDownSound
+@onready var power_on_sound = $PowerOnSound
+
 @onready var fuse_box = $FuseBox
+@onready var power_down_anim = $PowerDown
 @onready var switches = get_tree().get_nodes_in_group("Switch")
 @onready var open_close = $OpenClose
 
 var switches_down := false
 
 func use():
-	if !OfficeState.in_fusebox:
+	if !OfficeState.in_fusebox and OfficeState.looking_right and !OfficeState.eyes_closed:
 		open_close.play("OpenClose")
 		OfficeState.in_fusebox = true
 	else:
@@ -20,6 +24,8 @@ func _physics_process(delta):
 		
 	if !OfficeState.power_on and !switches_down:
 		switches_down = true
+		power_down_sound.play()
+		power_down_anim.play("PowerDown")
 		print("Power OFF")
 		var switch_count = randi_range(2,7)
 		for switch in switch_count:
@@ -33,4 +39,6 @@ func _physics_process(delta):
 	if !OfficeState.power_on and OfficeState.switches_down == 0:
 		switches_down = false
 		OfficeState.power_on = true
+		power_on_sound.play()
+		power_down_anim.play_backwards("PowerDown")
 		print("Power ON")

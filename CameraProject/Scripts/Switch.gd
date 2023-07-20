@@ -1,5 +1,6 @@
 extends StaticBody3D
 
+@onready var switch_sound = $"../../../SwitchSound"
 var switch_down := false
 
 func _physics_process(delta):
@@ -10,5 +11,6 @@ func _physics_process(delta):
 
 func use():
 	switch_down = false
+	switch_sound.play()
 	remove_from_group("Useable")
 	OfficeState.switches_down -= 1

@@ -20,7 +20,7 @@ extends StaticBody3D
 @onready var endo_positions = $"../EndoPositions"
 @onready var positions = endo_positions.get_children()
 
-var CurrentPosition = 7
+var CurrentPosition = 0
 
 var was_seen := false
 var ready_to_attack := false

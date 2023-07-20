@@ -4,7 +4,7 @@
 ssao_enabled = true
 ssao_radius = 6.75
 ssao_intensity = 5.0
-ssao_power = 6.5
+ssao_power = 4.0
 ssao_light_affect = 1.0
 glow_normalized = true
 glow_intensity = 1.2

@@ -22,7 +22,7 @@ extends StaticBody3D
 @onready var positions = chica_positions.get_children()
 
 var PositionCameras = [0,1,5,4,8,9]
-var CurrentPosition = 7
+var CurrentPosition = 0
 
 var was_seen := false
 var ready_to_attack := false

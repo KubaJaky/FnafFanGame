@@ -16,6 +16,13 @@ var can_use := true
 
 func _ready():
 	CameraNodes = Cameras.get_children()
+	
+func _physics_process(delta):
+	if Power == true and !OfficeState.power_on:
+		Power = false
+		AnimPlayer.play_backwards("On-Off")
+		PlayerCamera.PlayerCamAnim.play_backwards("Zoom")
+		OfficeState.in_cameras = false
 
 func change_cam(cam_num):
 	if Power == true:

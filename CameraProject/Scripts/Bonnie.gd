@@ -22,7 +22,7 @@ extends StaticBody3D
 @onready var positions = bonnie_positions.get_children()
 
 var PositionCameras = [0,1,2,3,7]
-var CurrentPosition = 15
+var CurrentPosition = 0
 
 var was_seen := false
 var ready_to_attack := false

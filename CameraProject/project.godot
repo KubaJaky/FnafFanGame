@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Office.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://SoundEffects/default_bus_layout.tres"
+
 [autoload]
 
 OfficeState="*res://Scripts/office_state.gd"

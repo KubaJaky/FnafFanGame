@@ -26,7 +26,7 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 7
+var agression = 20
 var insanity_inrease = 0.5
 
 func _physics_process(delta):
@@ -74,9 +74,9 @@ func _on_move_cd_timeout():
 			elif CurrentPosition == 3:
 				choose_room = randi_range(1,4)
 				if choose_room != 1:
-					OfficeState.power_on = false
-				else:
-					choose_room = -1
+					if OfficeState.power_on:
+						OfficeState.power_on = false
+				choose_room = -1
 			else:
 				choose_room = 1
 			disrupt_camera(choose_room)
