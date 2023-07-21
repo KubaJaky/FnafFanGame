@@ -26,7 +26,7 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 20
+var agression = 0
 var insanity_inrease = 0.5
 
 func _physics_process(delta):

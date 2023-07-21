@@ -44,7 +44,7 @@ func _physics_process(delta):
 		insane = false
 	
 func _on_panel_mouse_entered():
-	if !OfficeState.in_cameras:
+	if !OfficeState.in_cameras and !OfficeState.in_fusebox:
 		if int(PlayerCamera.rotation_degrees.y) == 0:
 			CameraRotation = 90.1
 			OfficeState.looking_left = true
@@ -53,7 +53,7 @@ func _on_panel_mouse_entered():
 			OfficeState.looking_right = false
 
 func _on_panel_2_mouse_entered():
-	if !OfficeState.in_cameras:
+	if !OfficeState.in_cameras and !OfficeState.in_fusebox:
 		if int(PlayerCamera.rotation_degrees.y) == 0:
 			CameraRotation = -90.1
 			OfficeState.looking_right = true
