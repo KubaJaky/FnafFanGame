@@ -29,7 +29,7 @@ func _physics_process(delta):
 		flashlight.light_color = "000000"
 		
 		
-	if Input.is_action_pressed("CalmDown") and !OfficeState.in_cameras and !OfficeState.eyes_closed:
+	if Input.is_action_pressed("CalmDown") and !OfficeState.in_cameras and !OfficeState.in_fusebox and !OfficeState.eyes_closed:
 		eyes_anim.play("CloseEyes")
 	elif !Input.is_action_pressed("CalmDown") and OfficeState.eyes_closed:
 		eyes_anim.play_backwards("CloseEyes")

@@ -6,19 +6,18 @@ extends StaticBody3D
 @onready var return_wait = $ReturnWait
 
 @onready var cam_monitor = $"../Monitor1"
-#@onready var body = $BonnieModel
-@onready var body = $Body
-@onready var animation_player = $BonnieModel/AnimationPlayer
+@onready var body = $FoxyModel
+#@onready var body = $Body
+@onready var animation_player = $FoxyModel/AnimationPlayer
 
-#@onready var pos_pupil_l = $BonnieModel/Armature/Skeleton3D/Icosphere020/PupilL
-#@onready var pos_pupil_r = $BonnieModel/Armature/Skeleton3D/Icosphere032/PupilR
+
 @onready var pupil_l = $PupilL
 @onready var pupil_r = $PupilR
 
 
 @onready var start_position_names := ["Backstage","DiningArea"]
-@onready var left_position_names := ["Arcade","WHall","RDoor1"]
-@onready var right_position_names := ["Kitchen","EHall","RDoor1"]
+@onready var left_position_names := ["Arcade","WHall","LDoor1"]
+@onready var right_position_names := ["Kitchen","EHall","LDoor1"]
 
 @onready var foxy_choose_names = [left_position_names, right_position_names]
 var position_names = []
@@ -44,26 +43,37 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 20
+var agression = 10
 var insanity_inrease = 2
 
 func _ready():
 	choose_route()
+	global_position = positions[CurrentPosition].global_position
+	rotation = positions[CurrentPosition].rotation
+	animation_player.play(position_names[CurrentPosition])
 
 func _physics_process(delta):
 	if ready_to_attack:
-		if OfficeState.right_door_closed and !attack_cd.paused:
-			attack_cd.set_paused(true)
-			return_wait.set_paused(false)
-		elif !OfficeState.right_door_closed and attack_cd.paused:
-			attack_cd.set_paused(false)
-			return_wait.set_paused(true)
+		if chosen_position == 0:
+			if OfficeState.left_door_closed and !attack_cd.paused:
+				attack_cd.set_paused(true)
+				return_wait.set_paused(false)
+			elif !OfficeState.left_door_closed and attack_cd.paused:
+				attack_cd.set_paused(false)
+				return_wait.set_paused(true)
+		elif chosen_position == 1:
+			if OfficeState.right_door_closed and !attack_cd.paused:
+				attack_cd.set_paused(true)
+				return_wait.set_paused(false)
+			elif !OfficeState.right_door_closed and attack_cd.paused:
+				attack_cd.set_paused(false)
+				return_wait.set_paused(true)
 			
 	if CurrentPosition == positions.size() - 1:
 		if OfficeState.flashlight_on:
 			if chosen_position == 0 and OfficeState.looking_left or chosen_position == 1 and OfficeState.looking_right:
 				body.visible = true
-				if !OfficeState.left_door_closed:
+				if chosen_position == 0 and !OfficeState.left_door_closed or chosen_position == 1 and !OfficeState.right_door_closed:
 					if !was_seen:
 						OfficeState.insanity += insanity_inrease * 10
 						was_seen = true
@@ -72,8 +82,6 @@ func _physics_process(delta):
 		else:
 			body.visible = false
 			
-	#pupil_l.global_position = pos_pupil_l.global_position
-	#pupil_r.global_position = pos_pupil_r.global_position
 
 func _on_move_cd_timeout():
 	#print("Foxy - Movement Opportunity")
@@ -120,7 +128,7 @@ func move():
 		return_wait.set_paused(true)
 	global_position = positions[CurrentPosition].global_position
 	rotation = positions[CurrentPosition].rotation
-	#animation_player.play(position_names[CurrentPosition])
+	animation_player.play(position_names[CurrentPosition])
 	
 func choose_route():
 	chosen_position = randi_range(0,1)
