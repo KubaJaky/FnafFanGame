@@ -94,6 +94,7 @@ func move():
 			OfficeState.right_door_occupied = true
 			ready_to_attack = true
 			attack_cd.start()
+			attack_cd.set_paused(false)
 			return_wait.start()
 			return_wait.set_paused(true)
 	global_position = positions[CurrentPosition].global_position

@@ -19,8 +19,8 @@ func use():
 		OfficeState.in_fusebox = false
 		
 func _physics_process(delta):
-	if Input.is_action_just_pressed("CalmDown"): # DEBUG < - Delete Later
-		OfficeState.power_on = false
+	#if Input.is_action_just_pressed("CalmDown"): # DEBUG < - Delete Later
+		#OfficeState.power_on = false
 		
 	if !OfficeState.power_on and !switches_down:
 		switches_down = true

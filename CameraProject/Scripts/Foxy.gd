@@ -42,6 +42,7 @@ var CurrentPosition = 0
 
 var was_seen := false
 var ready_to_attack := false
+var blinded := false
 
 var agression = 10
 var insanity_inrease = 2
@@ -55,17 +56,26 @@ func _ready():
 func _physics_process(delta):
 	if ready_to_attack:
 		if chosen_position == 0:
-			if OfficeState.left_door_closed and !attack_cd.paused:
+			if OfficeState.looking_left and OfficeState.flashlight_on and !blinded and !attack_cd.paused:
+				attack_cd.set_paused(true)
+				blinded = true
+				animation_player.play("Blinded")
+			if OfficeState.left_door_closed and blinded and !attack_cd.paused:
 				attack_cd.set_paused(true)
 				return_wait.set_paused(false)
-			elif !OfficeState.left_door_closed and attack_cd.paused:
+			elif !OfficeState.left_door_closed  and blinded and attack_cd.paused:
 				attack_cd.set_paused(false)
 				return_wait.set_paused(true)
+				
 		elif chosen_position == 1:
-			if OfficeState.right_door_closed and !attack_cd.paused:
+			if OfficeState.looking_right and OfficeState.flashlight_on and !blinded and !attack_cd.paused:
+				attack_cd.set_paused(true)
+				blinded = true
+				animation_player.play("Blinded")
+			if OfficeState.right_door_closed and blinded and !attack_cd.paused:
 				attack_cd.set_paused(true)
 				return_wait.set_paused(false)
-			elif !OfficeState.right_door_closed and attack_cd.paused:
+			elif !OfficeState.left_door_closed  and blinded and attack_cd.paused:
 				attack_cd.set_paused(false)
 				return_wait.set_paused(true)
 			
@@ -87,16 +97,22 @@ func _on_move_cd_timeout():
 	#print("Foxy - Movement Opportunity")
 	var move_chance = randi_range(1,20)
 	if agression >= move_chance:
-		if CurrentPosition == positions.size() - 2 and chosen_position == 0 and OfficeState.looking_left or CurrentPosition == positions.size() - 2 and chosen_position == 0 and OfficeState.left_door_occupied:
-			print("Foxy - Blocked")
-			print("Foxy - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_left == true)
-			print("Foxy - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.left_door_occupied == true)
+		if CurrentPosition == positions.size() - 2 and chosen_position == 0 and OfficeState.looking_left == true or CurrentPosition == positions.size() - 2 and chosen_position == 0 and OfficeState.left_door_occupied == true or CurrentPosition == positions.size() - 2 and chosen_position == 0 and OfficeState.left_door_closed == true:
+			if OfficeState.looking_left:
+				print("Foxy - Blocked - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_left == true)
+			if OfficeState.left_door_occupied: 
+				print("Foxy - Blocked - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.left_door_occupied == true)
+			if OfficeState.left_door_closed:
+				print("Foxy - Blocked - Door Closed - ", CurrentPosition == positions.size() - 2 and OfficeState.left_door_closed == true)
 				
-		elif CurrentPosition == positions.size() - 2 and  chosen_position == 1 and OfficeState.looking_right or CurrentPosition == positions.size() - 2 and  chosen_position == 1 and OfficeState.right_door_occupied:
-			print("Foxy - Blocked")
-			print("Foxy - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true)
-			print("Foxy - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.right_door_occupied == true)
-		
+		elif CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.looking_left == true or CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.left_door_occupied == true or CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.left_door_closed == true:
+			if OfficeState.looking_right:
+				print("Foxy - Blocked - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true)
+			if OfficeState.right_door_occupied: 
+				print("Foxy - Blocked - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.right_door_occupied == true)
+			if OfficeState.right_door_closed:
+				print("Foxy - Blocked - Door Closed - ", CurrentPosition == positions.size() - 2 and OfficeState.right_door_closed == true)
+				
 		else:
 			var choose_room
 			if CurrentPosition == 2:
@@ -119,11 +135,12 @@ func move():
 	if CurrentPosition == positions.size() - 1:
 		move_cd.stop()
 		ready_to_attack = true
+		attack_cd.start()
+		attack_cd.set_paused(false)
 		if chosen_position == 0:
 			OfficeState.left_door_occupied = true
 		elif chosen_position == 1:
 			OfficeState.right_door_occupied = true
-		attack_cd.start()
 		return_wait.start()
 		return_wait.set_paused(true)
 	global_position = positions[CurrentPosition].global_position
@@ -145,13 +162,25 @@ func choose_route():
 	position_names.append_array(start_position_names)
 	position_names.append_array(new_names)
 	
+func blind_end():
+	if chosen_position == 0:
+		if OfficeState.left_door_closed:
+			attack_cd.set_paused(false)
+		else:
+			jumpscare()
+	elif chosen_position == 1:
+		if OfficeState.right_door_closed:
+			attack_cd.set_paused(false)
+		else:
+			jumpscare()
 	
 func disrupt_camera(move):
 	if OfficeState.in_cameras:
-		if CurrentPosition == PositionCameras.size() - 2 and move == 2 or CurrentPosition == PositionCameras.size() - 1 and move == 1:
+		if CurrentPosition == PositionCameras.size() - 1 and move == 1:
 			if OfficeState.CurrentCamera == PositionCameras[CurrentPosition]:
 				cam_monitor.lose_signal()
 		else:
+			#print("Cameras Blocked: Cam", PositionCameras[CurrentPosition], ", Cam", PositionCameras[CurrentPosition + move])
 			if OfficeState.CurrentCamera == PositionCameras[CurrentPosition] or OfficeState.CurrentCamera == PositionCameras[CurrentPosition + move]:
 				cam_monitor.lose_signal()
 	
@@ -173,6 +202,7 @@ func _on_return_wait_timeout():
 	choose_route()
 	CurrentPosition = 1
 	was_seen = false
+	blinded = false
 	move_wait.start()
 	disrupt_camera(0)
 	move_cd.start()

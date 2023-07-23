@@ -15,6 +15,12 @@ extends CanvasLayer
 
 var insane := false
 
+func _ready():
+	$EyelidTop.size = DisplayServer.window_get_size()
+	$EyelidBot.size = DisplayServer.window_get_size()
+	$EyelidFill.size = DisplayServer.window_get_size()
+	print(DisplayServer.window_get_size())
+
 func _physics_process(delta):
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
 	

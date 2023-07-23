@@ -87,6 +87,7 @@ func move():
 			OfficeState.left_door_occupied = true
 			ready_to_attack = true
 			attack_cd.start()
+			attack_cd.set_paused(false)
 			return_wait.start()
 			return_wait.set_paused(true)
 	if CurrentPosition != 0 and guitar.visible:
