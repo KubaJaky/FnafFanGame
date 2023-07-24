@@ -60,6 +60,10 @@ func _physics_process(delta):
 				attack_cd.set_paused(true)
 				blinded = true
 				animation_player.play("Blinded")
+			elif OfficeState.left_door_closed and !blinded:
+				OfficeState.left_door_closed = false
+				jumpscare()
+				
 			if OfficeState.left_door_closed and blinded and !attack_cd.paused:
 				attack_cd.set_paused(true)
 				return_wait.set_paused(false)
@@ -72,6 +76,10 @@ func _physics_process(delta):
 				attack_cd.set_paused(true)
 				blinded = true
 				animation_player.play("Blinded")
+			elif OfficeState.right_door_closed and !blinded:
+				OfficeState.right_door_closed = false
+				jumpscare()
+				
 			if OfficeState.right_door_closed and blinded and !attack_cd.paused:
 				attack_cd.set_paused(true)
 				return_wait.set_paused(false)
@@ -105,7 +113,7 @@ func _on_move_cd_timeout():
 			if OfficeState.left_door_closed:
 				print("Foxy - Blocked - Door Closed - ", CurrentPosition == positions.size() - 2 and OfficeState.left_door_closed == true)
 				
-		elif CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.looking_left == true or CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.left_door_occupied == true or CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.left_door_closed == true:
+		elif CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.looking_right == true or CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.right_door_occupied == true or CurrentPosition == positions.size() - 2 and chosen_position == 1 and OfficeState.right_door_closed == true:
 			if OfficeState.looking_right:
 				print("Foxy - Blocked - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true)
 			if OfficeState.right_door_occupied: 
