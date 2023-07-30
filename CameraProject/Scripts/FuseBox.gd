@@ -22,7 +22,12 @@ func _physics_process(delta):
 	#if Input.is_action_just_pressed("CalmDown"): # DEBUG < - Delete Later
 		#OfficeState.power_on = false
 		
-	if !OfficeState.power_on and !switches_down:
+	if OfficeState.power_left <= 0 and OfficeState.power_on:
+		OfficeState.power_on = false
+		power_down_anim.play("PowerDown")
+		print("Power OFF")
+		
+	if !OfficeState.power_on and !switches_down and OfficeState.power_left > 0:
 		switches_down = true
 		power_down_sound.play()
 		power_down_anim.play("PowerDown")
@@ -36,7 +41,7 @@ func _physics_process(delta):
 			switches[id].add_to_group("Useable")
 			OfficeState.switches_down += 1
 			
-	if !OfficeState.power_on and OfficeState.switches_down == 0:
+	if !OfficeState.power_on and OfficeState.switches_down == 0 and OfficeState.power_left > 0:
 		switches_down = false
 		OfficeState.power_on = true
 		power_on_sound.play()

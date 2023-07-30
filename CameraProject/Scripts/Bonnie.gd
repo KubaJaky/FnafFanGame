@@ -27,10 +27,17 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 0
+var agression = 10
+var base_agression = agression
+
 var insanity_inrease = 0.5
 
 func _physics_process(delta):
+	if OfficeState.hour < 1:
+		agression = base_agression - (5 + OfficeState.night_number)
+	elif agression != base_agression:
+		agression = base_agression
+		
 	if ready_to_attack:
 		if OfficeState.left_door_closed and !attack_cd.paused:
 			attack_cd.set_paused(true)

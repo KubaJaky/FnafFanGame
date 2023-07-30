@@ -44,7 +44,9 @@ var was_seen := false
 var ready_to_attack := false
 var blinded := false
 
-var agression = 10
+var agression = 5
+var base_agression = agression
+
 var insanity_inrease = 2
 
 func _ready():
@@ -54,6 +56,11 @@ func _ready():
 	animation_player.play(position_names[CurrentPosition])
 
 func _physics_process(delta):
+	if OfficeState.hour < 3:
+		agression = base_agression - (8 + OfficeState.night_number)
+	elif agression != base_agression:
+		agression = base_agression
+		
 	if ready_to_attack:
 		if chosen_position == 0:
 			if OfficeState.looking_left and OfficeState.flashlight_on and !blinded and !attack_cd.paused:

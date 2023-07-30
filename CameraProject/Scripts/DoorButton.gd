@@ -13,10 +13,12 @@ func _physics_process(delta):
 			OfficeState.left_door_closed = false
 			button_anim.play_backwards("PushButton")
 			left_door_anim.play_backwards("Close")
+			OfficeState.power_usage -= 1
 		elif OfficeState.right_door_closed and !left:
 			button_anim.play_backwards("PushButton")
 			right_door_anim.play_backwards("Close")
 			OfficeState.right_door_closed = false
+			OfficeState.power_usage -= 1
 			
 func use():
 	if left:
@@ -26,10 +28,12 @@ func use():
 					button_anim.play("PushButton")
 					left_door_anim.play("Close")
 					OfficeState.left_door_closed = true
+					OfficeState.power_usage += 1
 				else:
 					button_anim.play_backwards("PushButton")
 					left_door_anim.play_backwards("Close")
 					OfficeState.left_door_closed = false
+					OfficeState.power_usage -= 1
 	else:
 		if int(PlayerCamera.rotation_degrees.y) == -90:
 			if !right_door_anim.is_playing() and OfficeState.power_on:
@@ -37,8 +41,10 @@ func use():
 					button_anim.play("PushButton")
 					right_door_anim.play("Close")
 					OfficeState.right_door_closed = true
+					OfficeState.power_usage += 1
 				else:
 					button_anim.play_backwards("PushButton")
 					right_door_anim.play_backwards("Close")
 					OfficeState.right_door_closed = false
+					OfficeState.power_usage -= 1
 					

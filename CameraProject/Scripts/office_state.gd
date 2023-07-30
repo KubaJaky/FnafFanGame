@@ -5,6 +5,12 @@ var in_cameras := false
 var in_fusebox := false
 var eyes_closed := false
 
+var night_number := 3
+var hour := 0
+
+var cpu_temp := 140.0
+var power_usage := 1
+var power_left := 100.0
 var power_on := true
 var switches_down := 0
 
@@ -22,7 +28,12 @@ var left_door_occupied := false
 var right_door_occupied := false
 
 func _process(delta):
-	if OfficeState.eyes_closed:
-		OfficeState.insanity -= 0.5
+	if eyes_closed:
+		insanity -= 0.5
+		
+	if power_on:
+		power_left -= float(power_usage)/(1000 - night_number*50)
 		
 	insanity = clamp(insanity,0,100)
+	power_left = clamp(power_left,0,100)
+	cpu_temp = clamp(cpu_temp,140.0,220.0)

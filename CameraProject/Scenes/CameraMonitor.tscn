@@ -1,11 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://dmvtyor0jngbg"]
+[gd_scene load_steps=33 format=3 uid="uid://dmvtyor0jngbg"]
 
 [ext_resource type="Shader" path="res://Shaders/CRT.gdshader" id="1_mi8vo"]
 [ext_resource type="Script" path="res://Scripts/Monitor.gd" id="1_skx2b"]
 [ext_resource type="Shader" path="res://Shaders/Screen.gdshader" id="2_d5sth"]
 [ext_resource type="Script" path="res://Scripts/CameraMonitorUse.gd" id="2_k8eyg"]
 [ext_resource type="PackedScene" uid="uid://cn20wbm05mnxq" path="res://Scenes/SecurityCamera.tscn" id="4_6mxqs"]
+[ext_resource type="Texture2D" uid="uid://bb60t5xlocx46" path="res://Graphics/BlueScreen.png" id="5_cm7wk"]
+[ext_resource type="Texture2D" uid="uid://dsin44pbdyisx" path="res://Graphics/CameraFrame.png" id="6_t30cf"]
 [ext_resource type="FontFile" uid="uid://boqmp0ngme3bh" path="res://Fonts/FFFFORWA.TTF" id="6_xsocf"]
+[ext_resource type="Texture2D" uid="uid://cx4vce5qkijgf" path="res://Graphics/RedDot.png" id="7_4263p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qt2bf"]
 size = Vector3(0.932528, 1, 0.323284)
@@ -180,6 +183,96 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.5
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="Animation" id="Animation_dmoj1"]
+resource_name = "Bluescreen"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/TVScreen/ColorRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 6, 6.2, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.0627451, 0.0627451, 0.0627451, 1), Color(0.0627451, 0.0627451, 0.0627451, 1), Color(0.0627451, 0.0627451, 0.0627451, 0), Color(0.0627451, 0.0627451, 0.0627451, 0), Color(0.0627451, 0.0627451, 0.0627451, 1), Color(0.0627451, 0.0627451, 0.0627451, 1), Color(0.0627451, 0.0627451, 0.0627451, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/TVScreen/CurrCameraLabel:theme_override_colors/font_color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/TVScreen/Frame:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/TVScreen/RecDot:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.666667)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubViewport/TVScreen/Bluescreen:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 0.8, 6, 6.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_bluescreen"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewport/TVScreen/Bluescreen:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 6.2, 6.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+
 [sub_resource type="Animation" id="Animation_26s8j"]
 resource_name = "Change"
 length = 0.3
@@ -206,6 +299,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/TVScreen/Frame:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/TVScreen/RecDot:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.666667)]
 }
 
 [sub_resource type="Animation" id="Animation_q7jau"]
@@ -234,6 +351,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/TVScreen/Frame:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/TVScreen/RecDot:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.666667)]
 }
 
 [sub_resource type="Animation" id="Animation_gr14v"]
@@ -386,13 +527,100 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0.501961)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SubViewport/TVScreen/Frame:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.501961)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SubViewport/TVScreen/RecDot:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.666667)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SubViewport/TVScreen/Bluescreen:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SubViewport/TVScreen/Bluescreen:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lgpwe"]
 _data = {
+"Bluescreen": SubResource("Animation_dmoj1"),
 "Change": SubResource("Animation_26s8j"),
 "LoseSignal": SubResource("Animation_q7jau"),
 "On-Off": SubResource("Animation_gr14v"),
 "RESET": SubResource("Animation_1v1n8")
+}
+
+[sub_resource type="Animation" id="Animation_gy23n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TVScreen/RecDot:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rb2l6"]
+resource_name = "Rec"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TVScreen/RecDot:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xf72b"]
+_data = {
+"RESET": SubResource("Animation_gy23n"),
+"Rec": SubResource("Animation_rb2l6")
 }
 
 [node name="Monitor" type="Area3D"]
@@ -470,6 +698,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Bluescreen" type="TextureRect" parent="SubViewport/TVScreen"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_cm7wk")
+expand_mode = 1
+
 [node name="ColorRect" type="ColorRect" parent="SubViewport/TVScreen"]
 layout_mode = 1
 anchors_preset = 15
@@ -488,10 +728,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Frame" type="TextureRect" parent="SubViewport/TVScreen"]
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_t30cf")
+
+[node name="RecDot" type="TextureRect" parent="SubViewport/TVScreen"]
+modulate = Color(1, 1, 1, 0.666667)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_top = 50.0
+offset_right = -60.0
+offset_bottom = 114.0
+grow_horizontal = 0
+texture = ExtResource("7_4263p")
+expand_mode = 1
+
 [node name="CurrCameraLabel" type="Label" parent="SubViewport/TVScreen"]
 layout_mode = 1
-offset_right = 286.0
-offset_bottom = 129.0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 326.0
+offset_bottom = 159.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 theme_override_fonts/font = ExtResource("6_xsocf")
 theme_override_font_sizes/font_size = 30
@@ -502,6 +768,13 @@ vertical_alignment = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_lgpwe")
+}
+
+[node name="RecDot" type="AnimationPlayer" parent="."]
+root_node = NodePath("../SubViewport")
+autoplay = "Rec"
+libraries = {
+"": SubResource("AnimationLibrary_xf72b")
 }
 
 [node name="MonitorLight" type="SpotLight3D" parent="."]

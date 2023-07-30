@@ -4,9 +4,12 @@ extends CanvasLayer
 @onready var CameraRotation = PlayerCamera.rotation_degrees.y
 @onready var flashlight = PlayerCamera.get_node("Flashlight")
 
+@onready var clock = $"../Clock"
 @onready var insanity_overlay = $InsanityOverlay
 
 @onready var Cameras = $"../Monitor1"
+@onready var InterfaceMonitor = $"../Monitor2"
+
 @onready var right_door_anim = $"../SecurityDoorRight/DoorAnim"
 @onready var left_door_anim = $"../SecurityDoorLeft/DoorAnim"
 @onready var eyes_anim = $Eyes
@@ -19,7 +22,7 @@ func _ready():
 	$EyelidTop.size = DisplayServer.window_get_size()
 	$EyelidBot.size = DisplayServer.window_get_size()
 	$EyelidFill.size = DisplayServer.window_get_size()
-	print(DisplayServer.window_get_size())
+	print(DisplayServer.window_get_size(), " - ", $EyelidTop.size, " / ", $EyelidBot.size, " / ", $EyelidFill.size)
 
 func _physics_process(delta):
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
@@ -48,6 +51,23 @@ func _physics_process(delta):
 		pulsing.play("Beat1")
 	elif OfficeState.insanity <= 0:
 		insane = false
+		
+	if Input.is_action_just_pressed("Left"):
+		if !OfficeState.in_cameras and !OfficeState.in_fusebox:
+			if int(PlayerCamera.rotation_degrees.y) == 0:
+				CameraRotation = 90.1
+				OfficeState.looking_left = true
+			elif int(PlayerCamera.rotation_degrees.y) == -90:
+				CameraRotation = 0.0
+				OfficeState.looking_right = false
+	elif Input.is_action_just_pressed("Right"):
+		if !OfficeState.in_cameras and !OfficeState.in_fusebox:
+			if int(PlayerCamera.rotation_degrees.y) == 0:
+				CameraRotation = -90.1
+				OfficeState.looking_right = true
+			elif int(PlayerCamera.rotation_degrees.y) == 90:
+				CameraRotation = 0.0
+				OfficeState.looking_left = false
 	
 func _on_panel_mouse_entered():
 	if !OfficeState.in_cameras and !OfficeState.in_fusebox:
@@ -66,6 +86,7 @@ func _on_panel_2_mouse_entered():
 		elif int(PlayerCamera.rotation_degrees.y) == 90:
 			CameraRotation = 0.0
 			OfficeState.looking_left = false
+
 			
 func toggle_eye_close():
 	if OfficeState.eyes_closed == true:
@@ -84,3 +105,9 @@ func check_beat():
 	else:
 		pulsing.stop()
 	
+
+
+func _on_hour_timer_timeout():
+	OfficeState.hour += 1
+	clock.update_hour()
+	InterfaceMonitor.update_hour()

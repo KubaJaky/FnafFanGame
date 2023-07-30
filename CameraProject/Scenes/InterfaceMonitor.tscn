@@ -1,11 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://dffqu70vmdxr8"]
+[gd_scene load_steps=29 format=3 uid="uid://dffqu70vmdxr8"]
 
 [ext_resource type="Script" path="res://Scripts/InterfaceMonitor.gd" id="1_f27aa"]
+[ext_resource type="Texture2D" uid="uid://bb60t5xlocx46" path="res://Graphics/BlueScreen.png" id="3_sxsjg"]
 [ext_resource type="Shader" path="res://Shaders/Screen.gdshader" id="3_uigba"]
 [ext_resource type="Shader" path="res://Shaders/CRT.gdshader" id="4_2iikp"]
+[ext_resource type="FontFile" uid="uid://deuqgpocpcysn" path="res://Fonts/PixelFJVerdana12pt.ttf" id="4_okttk"]
 [ext_resource type="Texture2D" uid="uid://bck5xp5q6rx1m" path="res://Graphics/CameraIcon.png" id="5_oal4f"]
 [ext_resource type="Texture2D" uid="uid://gpoob76wkyig" path="res://Graphics/FnafMapTransparent.png" id="5_orsa7"]
 [ext_resource type="FontFile" uid="uid://boqmp0ngme3bh" path="res://Fonts/FFFFORWA.TTF" id="6_1ueql"]
+[ext_resource type="Texture2D" uid="uid://cbygawrjm4gme" path="res://Graphics/PowerUsageColor.png" id="6_awxm0"]
 [ext_resource type="PackedScene" uid="uid://gukrhllthe7v" path="res://Scenes/CamTrigger.tscn" id="7_epknj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qt2bf"]
@@ -181,6 +184,216 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.5
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="Animation" id="Animation_g5vch"]
+resource_name = "Bluescreen"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/TVScreen/Bluescreen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.5, 6.2, 6.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/TVScreen/Map:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/TVScreen/CPUTemp:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/TVScreen/Hour:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubViewport/TVScreen/Bluescreen:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 0.8, 6, 6.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewport/TVScreen/Map:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewport/TVScreen/CPUTemp:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SubViewport/TVScreen/Hour:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_bluescreen"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SubViewport/TVScreen/Date:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SubViewport/TVScreen/Date:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SubViewport/TVScreen/PowerLeft:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SubViewport/TVScreen/PowerLeft:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("SubViewport/TVScreen/UsageProgress:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("SubViewport/TVScreen/UsageProgress:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SubViewport/TVScreen/Usage:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("SubViewport/TVScreen/Usage:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(6.4, 6.8, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_gr14v"]
 resource_name = "On-Off"
 length = 0.2
@@ -307,9 +520,202 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewport/TVScreen/Bluescreen:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewport/TVScreen/Map:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SubViewport/TVScreen/CPUTemp:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SubViewport/TVScreen/Hour:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SubViewport/TVScreen/Bluescreen:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SubViewport/TVScreen/Map:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SubViewport/TVScreen/CPUTemp:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SubViewport/TVScreen/Hour:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("SubViewport/TVScreen/Date:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("SubViewport/TVScreen/Date:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SubViewport/TVScreen/PowerLeft:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("SubViewport/TVScreen/PowerLeft:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("SubViewport/TVScreen/UsageProgress:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("SubViewport/TVScreen/UsageProgress:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("SubViewport/TVScreen/Usage:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("SubViewport/TVScreen/Usage:modulate")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lgpwe"]
 _data = {
+"Bluescreen": SubResource("Animation_g5vch"),
 "On-Off": SubResource("Animation_gr14v"),
 "RESET": SubResource("Animation_1v1n8")
 }
@@ -365,6 +771,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0431373, 0.0431373, 0.0431373, 1)
 
+[node name="Bluescreen" type="TextureRect" parent="SubViewport/TVScreen"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_sxsjg")
+expand_mode = 1
+
 [node name="CrtEffect" type="ColorRect" parent="SubViewport/TVScreen"]
 material = SubResource("ShaderMaterial_jipo4")
 layout_mode = 1
@@ -373,6 +791,71 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Hour" type="Label" parent="SubViewport/TVScreen"]
+layout_mode = 0
+offset_left = 823.0
+offset_top = 643.0
+offset_right = 970.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("4_okttk")
+theme_override_font_sizes/font_size = 30
+text = "0AM"
+horizontal_alignment = 1
+
+[node name="Date" type="Label" parent="SubViewport/TVScreen"]
+layout_mode = 0
+offset_left = 781.0
+offset_top = 30.0
+offset_right = 958.0
+offset_bottom = 174.0
+theme_override_fonts/font = ExtResource("4_okttk")
+theme_override_font_sizes/font_size = 30
+text = "24 Dec
+Sun
+"
+horizontal_alignment = 2
+
+[node name="CPUTemp" type="Label" parent="SubViewport/TVScreen"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 427.0
+offset_right = 331.0
+offset_bottom = 499.0
+theme_override_fonts/font = ExtResource("4_okttk")
+theme_override_font_sizes/font_size = 30
+text = "CPU: 999°F"
+
+[node name="PowerLeft" type="Label" parent="SubViewport/TVScreen"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 568.0
+offset_right = 388.0
+offset_bottom = 640.0
+theme_override_fonts/font = ExtResource("4_okttk")
+theme_override_font_sizes/font_size = 30
+text = "Power: 999%"
+
+[node name="Usage" type="Label" parent="SubViewport/TVScreen"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 640.0
+offset_right = 331.0
+offset_bottom = 712.0
+theme_override_fonts/font = ExtResource("4_okttk")
+theme_override_font_sizes/font_size = 30
+text = "Usage:"
+
+[node name="UsageProgress" type="TextureProgressBar" parent="SubViewport/TVScreen"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 647.0
+offset_right = 385.0
+offset_bottom = 709.0
+max_value = 5.0
+value = 5.0
+nine_patch_stretch = true
+texture_progress = ExtResource("6_awxm0")
 
 [node name="Map" type="TextureRect" parent="SubViewport/TVScreen"]
 layout_mode = 1
@@ -719,3 +1202,9 @@ CamNum = 8
 [node name="CamTrigger10" parent="." instance=ExtResource("7_epknj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0994509, 0.0255383, 0)
 CamNum = 9
+
+[node name="CpuUpdate" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="CpuUpdate" to="." method="_on_cpu_update_timeout"]

@@ -26,10 +26,17 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 0
+var agression = 15
+var base_agression = agression
+
 var insanity_inrease = 0.5
 
 func _physics_process(delta):
+	if OfficeState.hour < 3:
+		agression = base_agression - (8 + OfficeState.night_number)
+	elif agression != base_agression:
+		agression = base_agression
+	
 	if ready_to_attack:
 		if OfficeState.right_door_closed and !attack_cd.paused:
 			attack_cd.set_paused(true)
@@ -68,8 +75,8 @@ func _on_move_cd_timeout():
 				if choose_room == 2:
 					choose_room = 1
 			elif CurrentPosition == 2:
-				choose_room = randi_range(-1,2)
-				if choose_room == 0 or choose_room == 2:
+				choose_room = randi_range(-1,1)
+				if choose_room == 0:
 					choose_room = -1
 			elif CurrentPosition == 3:
 				choose_room = randi_range(1,4)

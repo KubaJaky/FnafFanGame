@@ -13,14 +13,27 @@ var CameraNames := ["Stage","Dining Area","Backstage","Arcade","Kitchen","Bathro
 
 var Power := false
 var can_use := true
+var bluescreen := false
 
 func _ready():
 	CameraNodes = Cameras.get_children()
 	
 func _physics_process(delta):
+	if Power == true and !bluescreen:
+		OfficeState.cpu_temp += 0.02
+	elif !bluescreen:
+		OfficeState.cpu_temp -= 0.2
+		
 	if Power == true and !OfficeState.power_on:
 		Power = false
 		AnimPlayer.play_backwards("On-Off")
+		PlayerCamera.PlayerCamAnim.play_backwards("Zoom")
+		OfficeState.in_cameras = false
+		OfficeState.power_usage -= 2
+	if Power == true and OfficeState.cpu_temp >= 200 and !bluescreen:
+		bluescreen = true
+		can_use = false
+		AnimPlayer.play("Bluescreen")
 		PlayerCamera.PlayerCamAnim.play_backwards("Zoom")
 		OfficeState.in_cameras = false
 
@@ -47,12 +60,22 @@ func use():
 			Power = true
 			PlayerCamera.PlayerCamAnim.play("Zoom")
 			OfficeState.in_cameras = true
+			OfficeState.power_usage += 2
 		else:
 			AnimPlayer.play_backwards("On-Off")
 			Power = false
 			PlayerCamera.PlayerCamAnim.play_backwards("Zoom")
 			OfficeState.in_cameras = false
+			OfficeState.power_usage -= 2
+		
 			
 func lose_signal():
 	AnimPlayer.play("LoseSignal")
 	
+func end_bluescreen():
+	bluescreen = false
+	OfficeState.cpu_temp = 140.0
+	Power = false
+	OfficeState.power_usage -= 2
+	AnimPlayer.play_backwards("On-Off")
+	can_use = true
