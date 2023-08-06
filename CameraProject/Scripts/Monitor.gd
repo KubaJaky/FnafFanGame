@@ -6,6 +6,9 @@ extends Area3D
 @onready var PlayerCamera = $"../Player/Camera3D"
 @onready var curr_camera_label = $SubViewport/TVScreen/CurrCameraLabel
 
+@onready var pc_fan_sound = $PCFanSound
+@onready var pc_crash_sound = $PCCrashSound
+
 var CameraNodes: Array
 var CurrentCamera := 0
 
@@ -21,6 +24,7 @@ func _ready():
 func _physics_process(delta):
 	if Power == true and !bluescreen:
 		OfficeState.cpu_temp += 0.02
+		pc_fan_sound.max_db = lerp(pc_fan_sound.max_db, -14 + OfficeState.cpu_temp/20, 0.6)
 	elif !bluescreen:
 		OfficeState.cpu_temp -= 0.2
 		

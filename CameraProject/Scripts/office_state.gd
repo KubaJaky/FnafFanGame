@@ -5,6 +5,9 @@ var in_cameras := false
 var in_fusebox := false
 var eyes_closed := false
 
+var in_jumpscare := false
+var dead := false
+
 var night_number := 3
 var hour := 0
 

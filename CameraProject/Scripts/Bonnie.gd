@@ -6,13 +6,13 @@ extends StaticBody3D
 @onready var return_wait = $ReturnWait
 
 @onready var cam_monitor = $"../Monitor1"
-#@onready var body = $BonnieModel
-@onready var body = $Body
+@onready var body = $BonnieModel
+#@onready var body = $Body
 @onready var guitar = $BonnieModel/Armature/Skeleton3D/Cube009/Cube009
 @onready var animation_player = $BonnieModel/AnimationPlayer
 
-#@onready var pos_pupil_l = $BonnieModel/Armature/Skeleton3D/Icosphere020/PupilL
-#@onready var pos_pupil_r = $BonnieModel/Armature/Skeleton3D/Icosphere032/PupilR
+@onready var pos_pupil_l = $BonnieModel/Armature/Skeleton3D/Icosphere032/Icosphere032/PupilL
+@onready var pos_pupil_r = $BonnieModel/Armature/Skeleton3D/Icosphere020/Icosphere020/PupilR
 @onready var pupil_l = $PupilL
 @onready var pupil_r = $PupilR
 
@@ -58,8 +58,8 @@ func _physics_process(delta):
 		else:
 			body.visible = false
 			
-	#pupil_l.global_position = pos_pupil_l.global_position
-	#pupil_r.global_position = pos_pupil_r.global_position
+	pupil_l.global_position = pos_pupil_l.global_position
+	pupil_r.global_position = pos_pupil_r.global_position
 
 func _on_move_cd_timeout():
 	#print("Bonnie - Movement Opportunity")

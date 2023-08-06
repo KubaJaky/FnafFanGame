@@ -49,7 +49,7 @@ func _physics_process(delta):
 	if CurrentPosition == positions.size() - 1:
 		if OfficeState.flashlight_on and OfficeState.looking_right:
 			body.visible = true
-			if !OfficeState.left_door_closed:
+			if !OfficeState.right_door_closed:
 				if !was_seen:
 					OfficeState.insanity += insanity_inrease * 10
 					was_seen = true

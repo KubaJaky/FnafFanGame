@@ -5,15 +5,18 @@ extends StaticBody3D
 @onready var move_wait = $MoveWait
 @onready var return_wait = $ReturnWait
 
+@onready var player = $"../UI"
+@onready var player_cam_anim = $"../Player/Camera3D/PlayerCamAnim"
+@onready var fusebox_anim = $"../FuseBox/OpenClose"
+
 @onready var cam_monitor = $"../Monitor1"
 @onready var body = $FoxyModel
 #@onready var body = $Body
 @onready var animation_player = $FoxyModel/AnimationPlayer
-
+@onready var state_anim = $StateAnim
 
 @onready var pupil_l = $PupilL
 @onready var pupil_r = $PupilR
-
 
 @onready var start_position_names := ["Backstage","DiningArea"]
 @onready var left_position_names := ["Arcade","WHall","LDoor1"]
@@ -44,7 +47,7 @@ var was_seen := false
 var ready_to_attack := false
 var blinded := false
 
-var agression = 5
+var agression = 20
 var base_agression = agression
 
 var insanity_inrease = 2
@@ -67,6 +70,7 @@ func _physics_process(delta):
 				attack_cd.set_paused(true)
 				blinded = true
 				animation_player.play("Blinded")
+				state_anim.play("BlindedState")
 			elif OfficeState.left_door_closed and !blinded:
 				OfficeState.left_door_closed = false
 				jumpscare()
@@ -83,6 +87,7 @@ func _physics_process(delta):
 				attack_cd.set_paused(true)
 				blinded = true
 				animation_player.play("Blinded")
+				state_anim.play("BlindedState")
 			elif OfficeState.right_door_closed and !blinded:
 				OfficeState.right_door_closed = false
 				jumpscare()
@@ -94,7 +99,7 @@ func _physics_process(delta):
 				attack_cd.set_paused(false)
 				return_wait.set_paused(true)
 			
-	if CurrentPosition == positions.size() - 1:
+	if CurrentPosition == positions.size() - 1 and attack_cd.time_left > 0:
 		if OfficeState.flashlight_on:
 			if chosen_position == 0 and OfficeState.looking_left or chosen_position == 1 and OfficeState.looking_right:
 				body.visible = true
@@ -200,7 +205,29 @@ func disrupt_camera(move):
 				cam_monitor.lose_signal()
 	
 func jumpscare():
-	print("Foxy - Dead")
+	if !OfficeState.in_jumpscare:
+		if OfficeState.in_cameras:
+			OfficeState.in_cameras = false
+			player_cam_anim.speed_scale = 2
+			player_cam_anim.play_backwards("Zoom")
+		if OfficeState.in_fusebox:
+			OfficeState.in_fusebox = false
+			fusebox_anim.speed_scale = 2
+			fusebox_anim.play_backwards("OpenClose")
+		if chosen_position == 0:
+			player.CameraRotation = 90.1
+		elif chosen_position == 1:
+			player.CameraRotation = -90.1
+		print("Foxy - Dead")
+		OfficeState.in_jumpscare = true
+		body.visible = true
+		animation_player.speed_scale = 2
+		state_anim.speed_scale = 2
+		animation_player.play("Jumpscare")
+		state_anim.play("JumscareState")
+		
+func end_jumpscare():
+	player.load_static()
 
 func _on_attack_cd_timeout():
 	jumpscare()
