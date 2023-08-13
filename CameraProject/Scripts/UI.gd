@@ -13,9 +13,14 @@ extends CanvasLayer
 @onready var right_door_anim = $"../SecurityDoorRight/DoorAnim"
 @onready var left_door_anim = $"../SecurityDoorLeft/DoorAnim"
 @onready var static_anim = $StaticNoise
+@onready var win_anim = $"6AM"
 @onready var eyes_anim = $Eyes
 @onready var pulsing = $Pulsing
 @onready var beat_sound = $HeartBeat
+@onready var flashlight_sound = $Flashlight
+@onready var stinger_sound = $Stinger
+@onready var jumpscare_sound = $Jumpscare
+@onready var jumpscare_short = $JumpscareShort
 
 var insane := false
 
@@ -35,10 +40,18 @@ func _input(event):
 func _physics_process(delta):
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
 	
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+		flashlight.light_color = "000000"
 	if !OfficeState.in_jumpscare and !OfficeState.dead:
 		if Input.is_action_pressed("Flashlight") and !OfficeState.in_cameras and !OfficeState.in_fusebox:
+			if OfficeState.flashlight_on == false:
+				flashlight_sound.pitch_scale = 1.5
+				flashlight_sound.play()
 			OfficeState.flashlight_on = true
 		else:
+			if OfficeState.flashlight_on == true:
+				flashlight_sound.pitch_scale = 2
+				flashlight_sound.play()
 			OfficeState.flashlight_on = false
 		
 		if OfficeState.flashlight_on == true:
@@ -62,7 +75,7 @@ func _physics_process(delta):
 			insane = false
 			
 		if Input.is_action_just_pressed("Left"):
-			if !OfficeState.in_cameras and !OfficeState.in_fusebox:
+			if !OfficeState.in_cameras and !OfficeState.in_fusebox and !OfficeState.eyes_closed:
 				if int(PlayerCamera.rotation_degrees.y) == 0:
 					CameraRotation = 90.1
 					OfficeState.looking_left = true
@@ -70,7 +83,7 @@ func _physics_process(delta):
 					CameraRotation = 0.0
 					OfficeState.looking_right = false
 		elif Input.is_action_just_pressed("Right"):
-			if !OfficeState.in_cameras and !OfficeState.in_fusebox:
+			if !OfficeState.in_cameras and !OfficeState.in_fusebox and !OfficeState.eyes_closed:
 				if int(PlayerCamera.rotation_degrees.y) == 0:
 					CameraRotation = -90.1
 					OfficeState.looking_right = true
@@ -79,7 +92,7 @@ func _physics_process(delta):
 					OfficeState.looking_left = false
 	
 func _on_panel_mouse_entered():
-	if !OfficeState.in_jumpscare and !OfficeState.dead:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
 		if !OfficeState.in_cameras and !OfficeState.in_fusebox:
 			if int(PlayerCamera.rotation_degrees.y) == 0:
 				CameraRotation = 90.1
@@ -89,7 +102,7 @@ func _on_panel_mouse_entered():
 				OfficeState.looking_right = false
 
 func _on_panel_2_mouse_entered():
-	if !OfficeState.in_jumpscare and !OfficeState.dead:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
 		if !OfficeState.in_cameras and !OfficeState.in_fusebox:
 			if int(PlayerCamera.rotation_degrees.y) == 0:
 				CameraRotation = -90.1
@@ -106,7 +119,7 @@ func toggle_eye_close():
 		OfficeState.eyes_closed = true
 			
 func check_beat():
-	if insane and !OfficeState.in_jumpscare and !OfficeState.dead:
+	if insane and !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
 		if OfficeState.insanity >= 25 and OfficeState.insanity < 50:
 			pulsing.play("Beat1")
 		if OfficeState.insanity >= 50 and OfficeState.insanity < 75:
@@ -124,8 +137,13 @@ func load_static():
 func _on_hour_timer_timeout():
 	if !OfficeState.dead:
 		OfficeState.hour += 1
+		if OfficeState.hour >= 6:
+			win_anim.play("6AM")
 		clock.update_hour()
 		InterfaceMonitor.update_hour()
+		
+func next_night():
+	get_tree().quit()
 
 func game_over_screen():
 	game_over = true

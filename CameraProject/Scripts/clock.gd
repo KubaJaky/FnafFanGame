@@ -7,6 +7,6 @@ func _ready():
 
 func update_hour():
 	if OfficeState.hour == 0:
-		hour_label.text = "12AM"
+		hour_label.text = "12:00"
 	else:
-		hour_label.text = str(OfficeState.hour)+"AM"
+		hour_label.text = str(OfficeState.hour)+":00"

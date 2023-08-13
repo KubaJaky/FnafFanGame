@@ -12,6 +12,8 @@ extends Area3D
 var CameraNodes: Array
 var CurrentCamera := 0
 
+var changing_cam := false
+
 var CameraNames := ["Stage","Dining Area","Backstage","Arcade","Kitchen","Bathrooms","Supply Closet","W.Hall","E.Hall","Storage"]
 
 var Power := false
@@ -27,6 +29,10 @@ func _physics_process(delta):
 		pc_fan_sound.max_db = lerp(pc_fan_sound.max_db, -14 + OfficeState.cpu_temp/20, 0.6)
 	elif !bluescreen:
 		OfficeState.cpu_temp -= 0.2
+	if AnimPlayer.is_playing() and AnimPlayer.current_animation == "Change":
+		changing_cam = true
+	else:
+		changing_cam = false
 		
 	if Power == true and !OfficeState.power_on:
 		Power = false

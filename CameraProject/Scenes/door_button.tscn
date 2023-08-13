@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://vhloqdepje0j"]
+[gd_scene load_steps=4 format=3 uid="uid://vhloqdepje0j"]
 
 [ext_resource type="Script" path="res://Scripts/DoorButton.gd" id="1_am6ic"]
+[ext_resource type="AudioStream" uid="uid://n3uboq82yffm" path="res://SoundEffects/DoorButton.wav" id="2_wfkvr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eepvg"]
 size = Vector3(0.214978, 0.322475, 0.306563)
@@ -20,3 +21,8 @@ light_color = Color(1, 0, 0, 1)
 light_energy = 0.5
 shadow_enabled = true
 omni_range = 1.0
+
+[node name="ButtonSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_wfkvr")
+volume_db = -2.0
+max_db = -6.0

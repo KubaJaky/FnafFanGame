@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cuuioc2ggmksk"]
+[gd_scene load_steps=14 format=3 uid="uid://cuuioc2ggmksk"]
 
 [ext_resource type="Texture2D" uid="uid://bwk2x1nmn1lkw" path="res://Models/SecurityDoor/SecurityDoor_streaky-metal1_albedo.png" id="1_p0l3j"]
 [ext_resource type="Texture2D" uid="uid://cja2s6bxt8ra0" path="res://Models/SecurityDoor/SecurityDoor_streaky-metal1_metallic-streaky-metal1_roughness.png" id="2_5iym2"]
 [ext_resource type="Texture2D" uid="uid://bp2ldlpkyvypi" path="res://Models/SecurityDoor/SecurityDoor_CautionBorder.png" id="3_2ai0h"]
+[ext_resource type="AudioStream" uid="uid://colnyyl6s7lv" path="res://SoundEffects/DoorClose.wav" id="4_jn37o"]
+[ext_resource type="AudioStream" uid="uid://ivam36llcq08" path="res://SoundEffects/DoorOpen.wav" id="5_7v00n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_whkvv"]
 size = Vector3(0.297917, 2.54706, 1.34251)
@@ -93,17 +95,16 @@ tracks/0/keys = {
 "points": PackedFloat32Array(2.94703, -0.25, 0, 0.1, -0.44226, 0.55, 0, -0.123, 0, 0.0158857, 0.55, 0, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.4, 0.5)
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoorAnim:speed_scale")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1.75, 1.0]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_qn8q8"]
@@ -118,18 +119,6 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(2.94703, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DoorAnim:speed_scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.75]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5l0b"]
@@ -157,3 +146,27 @@ speed_scale = 1.75
 libraries = {
 "": SubResource("AnimationLibrary_e5l0b")
 }
+
+[node name="DoorClose" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.961539, 0, 0, 0, 0.961539, 0, 0, 0, 0.961539, 0, -1.72752, 0)
+stream = ExtResource("4_jn37o")
+volume_db = -5.0
+max_db = 0.0
+pitch_scale = 0.5
+bus = &"Office SFX"
+
+[node name="DoorOpen" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.961539, 0, 0, 0, 0.961539, 0, 0, 0, 0.961539, 0, -0.620314, 0)
+stream = ExtResource("5_7v00n")
+volume_db = -7.0
+max_db = 0.0
+pitch_scale = 0.6
+bus = &"Office SFX"
+
+[node name="DoorPreClose" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.961539, 0, 0, 0, 0.961539, 0, 0, 0, 0.961539, 0, -0.620314, 0)
+stream = ExtResource("5_7v00n")
+volume_db = -18.0
+max_db = 0.0
+pitch_scale = 0.9
+bus = &"Office SFX"
