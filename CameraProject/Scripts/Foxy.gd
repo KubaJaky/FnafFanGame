@@ -47,7 +47,7 @@ var was_seen := false
 var ready_to_attack := false
 var blinded := false
 
-var agression = 20
+var agression = 11
 var base_agression = agression
 
 var insanity_inrease = 2

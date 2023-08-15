@@ -6,6 +6,8 @@ extends CanvasLayer
 
 @onready var clock = $"../Clock"
 @onready var insanity_overlay = $InsanityOverlay
+@onready var insanity_anim = $"../InsanityEyes/InsanityAnim"
+@onready var insanity_eyes_node = $"../InsanityEyes"
 
 @onready var Cameras = $"../Monitor1"
 @onready var InterfaceMonitor = $"../Monitor2"
@@ -22,7 +24,10 @@ extends CanvasLayer
 @onready var jumpscare_sound = $Jumpscare
 @onready var jumpscare_short = $JumpscareShort
 
+var play_chance = 4 #Ambience
+
 var insane := false
+var insanity_eyes := false
 
 var game_over := false
 
@@ -74,6 +79,21 @@ func _physics_process(delta):
 		elif OfficeState.insanity <= 0:
 			insane = false
 			
+		if OfficeState.insanity >= 50 and !insanity_eyes:
+			if !OfficeState.looking_left and !OfficeState.flashlight_on or !OfficeState.looking_right and !OfficeState.flashlight_on:
+				insanity_eyes = true
+				insanity_anim.play_backwards("EyesFade")
+		elif OfficeState.insanity < 50 and insanity_eyes:
+			if !OfficeState.looking_left and !OfficeState.flashlight_on or !OfficeState.looking_right and !OfficeState.flashlight_on:
+				insanity_eyes = false
+				insanity_anim.play("EyesFade")
+				
+		if insanity_eyes:
+			if OfficeState.looking_left and OfficeState.flashlight_on or OfficeState.looking_right and OfficeState.flashlight_on:
+				insanity_eyes_node.visible = false
+			elif !insanity_eyes_node.visible and !insanity_anim.is_playing():
+				insanity_eyes_node.visible = true
+						
 		if Input.is_action_just_pressed("Left"):
 			if !OfficeState.in_cameras and !OfficeState.in_fusebox and !OfficeState.eyes_closed:
 				if int(PlayerCamera.rotation_degrees.y) == 0:
@@ -130,6 +150,22 @@ func check_beat():
 		pulsing.stop()
 	
 	
+func _on_ambience_timer_timeout():
+	var play = randi_range(1,play_chance)
+	if play == 1:
+		get_node("Ambience" + str(randi_range(1,6))).play()
+		print("-- Ambience Played --")
+		play_chance = 4
+	else:
+		play_chance -= 1
+	$AmbienceTimer.wait_time = randi_range(45,90)
+	$AmbienceTimer.start()
+	
+func mute_background():
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Reverb SFX"), true)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Office SFX"), true)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Local SFX + Reverb"), true)
+	
 func load_static():
 	OfficeState.dead = true
 	static_anim.play("JumpscareTransition")
@@ -147,3 +183,4 @@ func next_night():
 
 func game_over_screen():
 	game_over = true
+

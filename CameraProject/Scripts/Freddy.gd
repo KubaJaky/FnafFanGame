@@ -33,7 +33,7 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-var agression = 20
+var agression = 10
 var base_agression = agression
 
 var insanity_inrease = 0.5
@@ -41,7 +41,7 @@ var insanity_inrease = 0.5
 func _physics_process(delta):
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
 		if OfficeState.hour < 3:
-			agression = base_agression - (8 + OfficeState.night_number)
+			agression = base_agression - (6 + OfficeState.night_number)
 		elif agression != base_agression:
 			agression = base_agression
 		
@@ -60,6 +60,7 @@ func _physics_process(delta):
 					if !was_seen:
 						OfficeState.insanity += insanity_inrease * 10
 						was_seen = true
+						player.stinger_sound.play()
 					else:
 						OfficeState.insanity += insanity_inrease
 			else:
@@ -88,6 +89,8 @@ func _on_move_cd_timeout():
 					if choose_room == 0:
 						choose_room = -1
 				elif CurrentPosition == 3:
+					var laugh_id = randi_range(1,3)
+					get_node("FreddyLaugh" + str(laugh_id)).play()
 					choose_room = randi_range(1,4)
 					if choose_room != 1:
 						if OfficeState.power_on:
@@ -158,7 +161,7 @@ func jumpscare_sound():
 		
 func end_jumpscare():
 		if !OfficeState.hour >= 6:
-		player.load_static()
+			player.load_static()
 
 func _on_attack_cd_timeout():
 	jumpscare()

@@ -8,15 +8,26 @@ extends StaticBody3D
 @onready var switches = get_tree().get_nodes_in_group("Switch")
 @onready var open_close = $OpenClose
 
+@onready var open_sound = $OpenSound
+@onready var close_sound = $CloseSound
+
 var switches_down := false
 
 func use():
 	if !OfficeState.in_fusebox and OfficeState.looking_right and !OfficeState.eyes_closed:
-		open_close.play("OpenClose")
 		OfficeState.in_fusebox = true
+		open_close.play("OpenClose")
 	else:
-		open_close.play_backwards("OpenClose")
 		OfficeState.in_fusebox = false
+		open_close.play_backwards("OpenClose")
+		
+func opening():
+	if OfficeState.in_fusebox:
+		open_sound.play()
+	
+func closing():
+	if !OfficeState.in_fusebox:
+		close_sound.play()
 		
 func _physics_process(delta):
 	#if Input.is_action_just_pressed("CalmDown"): # DEBUG < - Delete Later
