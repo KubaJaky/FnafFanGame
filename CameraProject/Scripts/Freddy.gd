@@ -54,17 +54,18 @@ func _physics_process(delta):
 				return_wait.set_paused(true)
 				
 		if CurrentPosition == positions.size() - 1:
-			if OfficeState.flashlight_on and OfficeState.looking_right:
-				body.visible = true
-				if !OfficeState.left_door_closed:
-					if !was_seen:
-						OfficeState.insanity += insanity_inrease * 10
-						was_seen = true
-						player.stinger_sound.play()
-					else:
-						OfficeState.insanity += insanity_inrease
-			else:
-				body.visible = false
+			if attack_cd.time_left > 0 and !OfficeState.in_jumpscare:
+				if OfficeState.flashlight_on and OfficeState.looking_right:
+					body.visible = true
+					if !OfficeState.right_door_closed:
+						if !was_seen:
+							OfficeState.insanity += insanity_inrease * 10
+							was_seen = true
+							player.stinger_sound.play()
+						else:
+							OfficeState.insanity += insanity_inrease
+				else:
+					body.visible = false
 			
 	pupil_l.global_position = pos_pupil_l.global_position
 	pupil_r.global_position = pos_pupil_r.global_position

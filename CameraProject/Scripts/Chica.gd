@@ -77,6 +77,10 @@ func _on_move_cd_timeout():
 				print("Chica - Blocked")
 				print("Chica - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true)
 				print("Chica - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.right_door_occupied == true)
+			elif CurrentPosition == positions.size() - 3 and OfficeState.looking_right == true or CurrentPosition == positions.size() - 3 and OfficeState.right_door_occupied == true:
+				print("Chica - Blocked")
+				print("Chica - Looking at door - ", CurrentPosition == positions.size() - 2 and OfficeState.looking_right == true)
+				print("Chica - Door Occupied - ", CurrentPosition == positions.size() - 2 and OfficeState.right_door_occupied == true)
 			else:
 				var choose_room
 				if CurrentPosition == 1 or CurrentPosition == 4:

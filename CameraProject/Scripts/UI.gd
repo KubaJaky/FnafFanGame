@@ -43,6 +43,13 @@ func _input(event):
 			get_tree().quit()
 
 func _physics_process(delta):
+	
+	if Input.is_action_just_pressed("FullScreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
 	
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:

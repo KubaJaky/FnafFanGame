@@ -26,13 +26,14 @@ var CurrentPosition = 0
 
 var was_seen := false
 var ready_to_attack := false
+var make_noise := false
 
 var agression = 10
 var base_agression = agression
 
 var insanity_inrease = 1
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
 		if OfficeState.hour < 2:
 			agression = base_agression - (10 + OfficeState.night_number)
@@ -91,6 +92,7 @@ func move():
 			attack_cd.set_paused(false)
 			return_wait.start()
 			return_wait.set_paused(true)
+			make_noise = true
 			state_anim.play("DoorState")
 	global_position = positions[CurrentPosition].global_position
 	rotation = positions[CurrentPosition].rotation
@@ -99,9 +101,10 @@ func move():
 		door_anim.play("DoorOpen")
 		
 func noise():
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
-		endo_noise.pitch_scale += 0.1
-		state_anim.play("DoorState")
+	if make_noise == true:
+		if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+			state_anim.play("DoorState")
+			endo_noise.pitch_scale += 0.1
 	
 func jumpscare():
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
@@ -142,6 +145,8 @@ func _on_return_wait_timeout():
 	OfficeState.left_door_occupied = false
 	CurrentPosition = 0
 	was_seen = false
+	make_noise = false
+	endo_noise.pitch_scale = 0.7
 	move_wait.start()
 	door_anim.play("RESET")
 	move_cd.start()
