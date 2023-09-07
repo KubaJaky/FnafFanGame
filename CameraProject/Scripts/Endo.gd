@@ -28,7 +28,7 @@ var was_seen := false
 var ready_to_attack := false
 var make_noise := false
 
-var agression = 10
+var agression = 10 #10
 var base_agression = agression
 
 var insanity_inrease = 1
