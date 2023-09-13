@@ -63,6 +63,12 @@ func update_hour():
 		
 func update_cpu():
 	cpu_label.text = "CPU: " + str(int(OfficeState.cpu_temp)) + "°F"
+	if int(OfficeState.cpu_temp) >= 180:
+		cpu_label.self_modulate = "ff0000"
+	elif int(OfficeState.cpu_temp) >= 160:
+		cpu_label.self_modulate = "ffe100"
+	elif int(OfficeState.cpu_temp) < 160:
+		cpu_label.self_modulate = "ffffff"
 
 func _on_cpu_update_timeout():
 	update_cpu()

@@ -880,7 +880,7 @@ render_target_update_mode = 4
 [node name="Cameras" type="Node3D" parent="SubViewport"]
 
 [node name="SecurityCamera1" parent="SubViewport/Cameras" instance=ExtResource("4_6mxqs")]
-transform = Transform3D(0.83867, 0, 0.544639, 0, 1, 0, -0.544639, 0, 0.83867, -0.247841, 1.41066, -21.6375)
+transform = Transform3D(0.83867, 0, 0.544639, 0, 1, 0, -0.544639, 0, 0.83867, -0.247841, 1.78087, -21.9704)
 
 [node name="SecurityCamera2" parent="SubViewport/Cameras" instance=ExtResource("4_6mxqs")]
 transform = Transform3D(0.927184, 0, 0.374607, 0, 1, 0, -0.374607, 0, 0.927184, 0.973631, 1.41066, -15.0573)
