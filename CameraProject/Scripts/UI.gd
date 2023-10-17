@@ -190,4 +190,3 @@ func next_night():
 
 func game_over_screen():
 	game_over = true
-

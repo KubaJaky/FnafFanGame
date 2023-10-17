@@ -47,7 +47,7 @@ var was_seen := false
 var ready_to_attack := false
 var blinded := false
 
-var agression = 11 #11
+@export var agression :int #11 - night 3
 var base_agression = agression
 
 var insanity_inrease = 2

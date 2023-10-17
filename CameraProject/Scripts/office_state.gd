@@ -8,7 +8,7 @@ var eyes_closed := false
 var in_jumpscare := false
 var dead := false
 
-var night_number := 3
+var night_number := 1
 var hour := 0
 
 var cpu_temp := 140.0
@@ -30,12 +30,16 @@ var right_door_closed := false
 var left_door_occupied := false
 var right_door_occupied := false
 
+#func _ready():
+#	Engine.max_fps = 15
+
 func _process(delta):
 	if eyes_closed:
 		insanity -= 0.5
 		
 	if power_on:
-		power_left -= float(power_usage)/(1000 - night_number*50)
+		power_left -= float(power_usage * (delta * 70))/(1000 - night_number*50)
+#	print("FPS %d" % Engine.get_frames_per_second())
 		
 	insanity = clamp(insanity,0,100)
 	power_left = clamp(power_left,0,100)

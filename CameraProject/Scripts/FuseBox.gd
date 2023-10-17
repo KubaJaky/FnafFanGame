@@ -29,6 +29,10 @@ func closing():
 	if !OfficeState.in_fusebox:
 		close_sound.play()
 		
+func blackout():
+	if OfficeState.power_on:
+		OfficeState.power_on = false
+		
 func _physics_process(delta):
 	#if Input.is_action_just_pressed("CalmDown"): # DEBUG < - Delete Later
 		#OfficeState.power_on = false
