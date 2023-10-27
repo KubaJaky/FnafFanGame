@@ -37,6 +37,7 @@ func _ready():
 	$EyelidFill.size = DisplayServer.window_get_size()
 	print(DisplayServer.window_get_size(), " - ", $EyelidTop.size, " / ", $EyelidBot.size, " / ", $EyelidFill.size)
 
+
 func _input(event):
 	if game_over:
 		if event is InputEventKey or event is InputEventMouseButton and event.pressed:

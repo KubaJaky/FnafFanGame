@@ -48,11 +48,12 @@ var ready_to_attack := false
 var blinded := false
 
 @export var agression :int #11 - night 3
-var base_agression = agression
+var base_agression :int
 
 var insanity_inrease = 2
 
 func _ready():
+	base_agression = agression
 	choose_route()
 	global_position = positions[CurrentPosition].global_position
 	rotation = positions[CurrentPosition].rotation

@@ -33,12 +33,12 @@ var was_seen := false
 var ready_to_attack := false
 
 @export var agression :int #12 - night 3
-var base_agression = agression
-
+var base_agression :int
+	
 var insanity_inrease = 0.5
 
 func _ready():
-	print(agression)
+	base_agression = agression
 
 func _physics_process(delta):
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
