@@ -137,10 +137,15 @@ func disrupt_camera(room_move):
 		else:
 			if OfficeState.CurrentCamera == PositionCameras[CurrentPosition] or OfficeState.CurrentCamera == PositionCameras[CurrentPosition + room_move]:
 				cam_monitor.lose_signal()
+				
+func endgame_jumpscare():
+	
+	jumpscare()
 	
 func jumpscare():
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6 or OfficeState.night_number == 5 and OfficeState.hour >= 6:
 		global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosRight").global_position
+		rotation = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosRight").rotation
 		if OfficeState.in_cameras:
 			OfficeState.in_cameras = false
 			player_cam_anim.speed_scale = 2
@@ -166,6 +171,8 @@ func jumpscare_sound():
 func end_jumpscare():
 		if !OfficeState.hour >= 6:
 			player.load_static()
+		elif OfficeState.night_number == 5 and OfficeState.hour == 6:
+			player.load_night5_end()
 
 func _on_attack_cd_timeout():
 	jumpscare()

@@ -9,7 +9,7 @@ var in_jumpscare := false
 var dead := false
 
 var night_number := 1
-var hour := 0
+var hour := 5
 
 var cpu_temp := 140.0
 var power_usage := 1

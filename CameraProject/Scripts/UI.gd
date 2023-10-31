@@ -24,6 +24,8 @@ extends CanvasLayer
 @onready var jumpscare_sound = $Jumpscare
 @onready var jumpscare_short = $JumpscareShort
 
+var night_5_end := false
+
 var play_chance = 4 #Ambience
 
 var insane := false
@@ -120,7 +122,7 @@ func _physics_process(delta):
 					OfficeState.looking_left = false
 	
 func _on_panel_mouse_entered():
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.eyes_closed:
 		if !OfficeState.in_cameras and !OfficeState.in_fusebox:
 			if int(PlayerCamera.rotation_degrees.y) == 0:
 				CameraRotation = 90.1
@@ -130,7 +132,7 @@ func _on_panel_mouse_entered():
 				OfficeState.looking_right = false
 
 func _on_panel_2_mouse_entered():
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.eyes_closed:
 		if !OfficeState.in_cameras and !OfficeState.in_fusebox:
 			if int(PlayerCamera.rotation_degrees.y) == 0:
 				CameraRotation = -90.1
@@ -178,14 +180,30 @@ func load_static():
 	OfficeState.dead = true
 	static_anim.play("JumpscareTransition")
 
+func load_night5_end():
+	OfficeState.dead = true
+	static_anim.play("Night5End")
+
 func _on_hour_timer_timeout():
-	if !OfficeState.dead:
+	if !OfficeState.dead and !OfficeState.hour == 6:
 		OfficeState.hour += 1
 		if OfficeState.hour >= 6:
-			win_anim.play("6AM")
+			if OfficeState.night_number == 5 and !night_5_end:
+				night_5_end = true
+				$PhoneGuy.play("PhoneCall_5End")
+			else:
+				win_anim.play("6AM")
 		clock.update_hour()
 		InterfaceMonitor.update_hour()
 		
+func ur_fucked():
+	$"../Bonnie".base_agression = 0
+	$"../Chica".base_agression = 0
+	$"../Freddy".base_agression = 0
+	$"../Endo".base_agression = 0
+	$"../Foxy".base_agression = 0
+	OfficeState.power_left = 0
+	
 func next_night():
 	get_tree().quit()
 
