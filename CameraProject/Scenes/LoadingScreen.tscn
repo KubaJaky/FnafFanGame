@@ -1,0 +1,202 @@
+[gd_scene load_steps=15 format=3 uid="uid://dl3nena3wa3e1"]
+
+[ext_resource type="Script" path="res://Scripts/LoadingScreen.gd" id="1_baety"]
+[ext_resource type="Texture2D" uid="uid://yakn4v5nm2xh" path="res://Graphics/LoadingScreenBGVignette.png" id="2_owqtc"]
+[ext_resource type="Texture2D" uid="uid://cwjuo6kjqiamk" path="res://Graphics/LoadingScreenBGBrightVignette.png" id="3_khguu"]
+[ext_resource type="Texture2D" uid="uid://dn2l3k72hnyog" path="res://Graphics/LoadingScreenBGDarkVignette.png" id="4_sqofh"]
+[ext_resource type="Texture2D" uid="uid://co3t03ldghyu7" path="res://Graphics/FreddyIconTransparent.png" id="5_tryi4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3nbg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rph57"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Environment" id="Environment_6dc80"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.35
+glow_blend_mode = 0
+glow_hdr_threshold = 0.15
+
+[sub_resource type="Animation" id="Animation_mwvvj"]
+resource_name = "Loading"
+length = 15.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.9, 1.1, 4, 4.1, 4.2, 4.3, 4.4, 6, 6.1, 6.9, 7, 7.5, 7.6, 7.7, 7.9, 8, 8.1, 8.2, 8.5, 8.6, 8.7, 8.8, 8.9, 9, 9.6, 9.7, 11, 11.1, 11.2, 11.3, 12, 12.1, 13.5, 13.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("4_sqofh"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("4_sqofh"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc"), ExtResource("3_khguu"), ExtResource("2_owqtc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FreddyIcon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 5, 6.5, 10, 11.5, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 1), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 1), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dfenl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_owqtc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FreddyIcon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n0pb5"]
+_data = {
+"Loading": SubResource("Animation_mwvvj"),
+"RESET": SubResource("Animation_dfenl")
+}
+
+[sub_resource type="Animation" id="Animation_o6r7a"]
+resource_name = "Fade"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"load_scene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cjmrq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhpng"]
+_data = {
+"Fade": SubResource("Animation_o6r7a"),
+"RESET": SubResource("Animation_cjmrq")
+}
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_baety")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_owqtc")
+expand_mode = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_u3nbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rph57")
+value = 50.0
+show_percentage = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6dc80")
+
+[node name="BackgroundFrames" type="AnimationPlayer" parent="."]
+autoplay = "Loading"
+libraries = {
+"": SubResource("AnimationLibrary_n0pb5")
+}
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rhpng")
+}
+
+[node name="FreddyIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 50.0
+grow_horizontal = 2
+texture = ExtResource("5_tryi4")
+expand_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

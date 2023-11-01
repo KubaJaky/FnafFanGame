@@ -38,6 +38,12 @@ func _ready():
 	$EyelidBot.size = DisplayServer.window_get_size()
 	$EyelidFill.size = DisplayServer.window_get_size()
 	print(DisplayServer.window_get_size(), " - ", $EyelidTop.size, " / ", $EyelidBot.size, " / ", $EyelidFill.size)
+	$InsanityOverlay.visible = true
+	$InsanityOverlay.modulate = "ffffff00"
+	# Fix this /\ so it doesn't appear at the start of the night
+	# and still appears when insanity goes up
+	
+	# Don't know how you'll do it. Have fun!
 
 
 func _input(event):
