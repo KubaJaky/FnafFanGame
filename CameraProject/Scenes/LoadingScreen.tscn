@@ -1,10 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl3nena3wa3e1"]
+[gd_scene load_steps=21 format=3 uid="uid://dl3nena3wa3e1"]
 
 [ext_resource type="Script" path="res://Scripts/LoadingScreen.gd" id="1_baety"]
 [ext_resource type="Texture2D" uid="uid://yakn4v5nm2xh" path="res://Graphics/LoadingScreenBGVignette.png" id="2_owqtc"]
 [ext_resource type="Texture2D" uid="uid://cwjuo6kjqiamk" path="res://Graphics/LoadingScreenBGBrightVignette.png" id="3_khguu"]
 [ext_resource type="Texture2D" uid="uid://dn2l3k72hnyog" path="res://Graphics/LoadingScreenBGDarkVignette.png" id="4_sqofh"]
 [ext_resource type="Texture2D" uid="uid://co3t03ldghyu7" path="res://Graphics/FreddyIconTransparent.png" id="5_tryi4"]
+[ext_resource type="AudioStream" uid="uid://btw4j7gi8px0l" path="res://SoundEffects/Blink1.wav" id="6_h3rwu"]
+[ext_resource type="AudioStream" uid="uid://b5r08h8b6wahl" path="res://SoundEffects/Blink2.wav" id="7_qv3i6"]
+[ext_resource type="AudioStream" uid="uid://c007gixc7uf4t" path="res://SoundEffects/Blink3.wav" id="8_pjq4e"]
+[ext_resource type="AudioStream" uid="uid://bi3x5ehvyqel8" path="res://SoundEffects/AmbienceLoading/SoundsCrate-Distorted_Strings_Ambience_1.wav" id="9_knek2"]
+[ext_resource type="AudioStream" uid="uid://bbqxdproxdd6i" path="res://SoundEffects/AmbienceLoading/SoundsCrate-Horror_Ambience_Dead_Winds_1.wav" id="10_o044n"]
+[ext_resource type="AudioStream" uid="uid://bieppgh0hytjy" path="res://SoundEffects/AmbienceLoading/soundscrate-demons.wav" id="11_xxq77"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3nbg"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -47,6 +53,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 1), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 1), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Blink1:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 7.5, 8.5, 8.9, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blink2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.9, 4.1, 4.3, 6.9, 7.7, 8.1, 8.7, 9.6, 11.2, 13.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true, true, true, true, true, true, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blink3:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 6, 8, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
 
 [sub_resource type="Animation" id="Animation_dfenl"]
 length = 0.001
@@ -73,6 +115,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Blink1:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blink2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blink3:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n0pb5"]
@@ -110,6 +188,78 @@ tracks/1/keys = {
 "method": &"load_scene"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Blink1:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.0, -80.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blink2:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.0, -80.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blink3:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.0, -80.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BGNoise1:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-20.0, -80.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BGNoise2:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-10.0, -80.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BGNoise3:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-20.0, -80.0]
+}
 
 [sub_resource type="Animation" id="Animation_cjmrq"]
 length = 0.001
@@ -124,6 +274,78 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blink1:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Blink2:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blink3:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BGNoise1:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-20.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BGNoise2:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-10.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BGNoise3:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-20.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rhpng"]
@@ -200,3 +422,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Blink1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_h3rwu")
+volume_db = -2.0
+
+[node name="Blink2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_qv3i6")
+volume_db = -2.0
+
+[node name="Blink3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_pjq4e")
+volume_db = -2.0
+
+[node name="BGNoise1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_knek2")
+volume_db = -20.0
+
+[node name="BGNoise2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_o044n")
+volume_db = -10.0
+
+[node name="BGNoise3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_xxq77")
+volume_db = -20.0
+
+[connection signal="finished" from="BGNoise1" to="." method="_on_bg_noise_1_finished"]
+[connection signal="finished" from="BGNoise2" to="." method="_on_bg_noise_2_finished"]
+[connection signal="finished" from="BGNoise3" to="." method="_on_bg_noise_3_finished"]
