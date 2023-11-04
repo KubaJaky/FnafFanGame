@@ -127,7 +127,6 @@ func disrupt_camera(room_move):
 	
 func jumpscare():
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
-		global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosLeft").global_position
 		if OfficeState.in_cameras:
 			OfficeState.in_cameras = false
 			player_cam_anim.speed_scale = 2
@@ -146,6 +145,9 @@ func jumpscare():
 		state_anim.speed_scale = 1
 		animation_player.play("Jumpscare")
 		state_anim.play("JumpscareState")
+		global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosLeft").global_position
+		# /\ This was in line 130, try it out.
+		# Should fix the weird position before jumpscare issue
 		
 func jumpscare_sound():
 	player.jumpscare_sound.play()
