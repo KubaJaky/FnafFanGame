@@ -21,14 +21,14 @@ var dates = [
 	"31 Jun
 	Thu",
 	
-	"1 Sep
+	"1 Jul
 	Fri",
 	
 	"12 Apr
 	Sat",
 	
-	"-- --
-	---",
+	"7 Aug
+	Wed",
 ]
 
 var Power := false
@@ -37,7 +37,7 @@ var bluescreen := false
 func _ready():
 	update_hour()
 	update_cpu()
-	date_label.text = dates[OfficeState.night_number-1]
+	
 
 func _physics_process(delta):
 	if !CamMonitor.bluescreen:
@@ -75,3 +75,6 @@ func _on_cpu_update_timeout():
 	
 func end_bluescreen():
 	bluescreen = false
+
+func _on_date_timer_timeout():
+	date_label.text = dates[OfficeState.night_number-1]

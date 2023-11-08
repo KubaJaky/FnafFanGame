@@ -426,26 +426,32 @@ color = Color(0, 0, 0, 1)
 [node name="Blink1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_h3rwu")
 volume_db = -2.0
+bus = &"Local SFX"
 
 [node name="Blink2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_qv3i6")
 volume_db = -2.0
+bus = &"Local SFX"
 
 [node name="Blink3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_pjq4e")
 volume_db = -2.0
+bus = &"Local SFX"
 
 [node name="BGNoise1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_knek2")
 volume_db = -20.0
+bus = &"Ambience"
 
 [node name="BGNoise2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_o044n")
 volume_db = -10.0
+bus = &"Ambience"
 
 [node name="BGNoise3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_xxq77")
 volume_db = -20.0
+bus = &"Ambience"
 
 [connection signal="finished" from="BGNoise1" to="." method="_on_bg_noise_1_finished"]
 [connection signal="finished" from="BGNoise2" to="." method="_on_bg_noise_2_finished"]

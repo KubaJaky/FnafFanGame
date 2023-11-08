@@ -32,7 +32,15 @@ var CurrentPosition = 0
 var was_seen := false
 var ready_to_attack := false
 
-@export var agression :int #12 - night 3
+# Agression Chart
+# 5 - night 1
+# 7 - night 2
+# 12 - night 3
+# 14 - night 4
+# 16 - night 5
+# ? - night 6
+
+@export var agression :int
 var base_agression :int
 	
 var insanity_inrease = 0.5

@@ -10,7 +10,7 @@ var scene_load_status = 0
 var loading_scene := false
 
 func _ready():
-	sceneName = "res://Scenes/Night1.tscn"
+	sceneName = "res://Scenes/Night" + str(OfficeState.loading_night) + ".tscn"
 	ResourceLoader.load_threaded_request(sceneName)
 	transition.play_backwards("Fade")
 	get_node("BGNoise" + str(randi_range(1,3))).play()
