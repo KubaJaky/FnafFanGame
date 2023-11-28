@@ -25,11 +25,14 @@ extends StaticBody3D
 @onready var chica_positions = $"../ChicaPositions"
 @onready var positions = chica_positions.get_children()
 
+@onready var save = $"../Save"
+
 var PositionCameras = [0,1,5,4,8,9]
 var CurrentPosition = 0
 
 var was_seen := false
 var ready_to_attack := false
+
 
 # Agression Chart
 # 3 - night 1
@@ -37,7 +40,7 @@ var ready_to_attack := false
 # 12 - night 3
 # 12 - night 4
 # 14 - night 5
-# ? - night 6
+# 18 - night 6
 
 @export var agression :int
 var base_agression :int
@@ -45,6 +48,8 @@ var base_agression :int
 var insanity_inrease = 0.5
 
 func _ready():
+	if OfficeState.night_number == 7:
+		agression = save.CustomChica
 	base_agression = agression
 
 func _physics_process(delta):

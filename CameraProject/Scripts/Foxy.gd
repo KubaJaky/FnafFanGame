@@ -29,6 +29,8 @@ var position_names = []
 @onready var foxy_positions_left = $"../FoxyPositions/FoxyPositionsLeft".get_children()
 @onready var foxy_positions_right = $"../FoxyPositions/FoxyPositionsRight".get_children()
 
+@onready var save = $"../Save"
+
 @onready var foxy_choose_position = [foxy_positions_left, foxy_positions_right]
 var chosen_position = 0
 
@@ -53,7 +55,7 @@ var blinded := false
 # 11 - night 3
 # 13 - night 4
 # 15 - night 5
-# ? - night 6
+# 17 - night 6
 
 @export var agression :int
 var base_agression :int
@@ -61,6 +63,8 @@ var base_agression :int
 var insanity_inrease = 2
 
 func _ready():
+	if OfficeState.night_number == 7:
+		agression = save.CustomFoxy
 	base_agression = agression
 	choose_route()
 	global_position = positions[CurrentPosition].global_position

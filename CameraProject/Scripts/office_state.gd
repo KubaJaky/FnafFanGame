@@ -10,7 +10,9 @@ var dead := false
 
 var loading_night := 0
 var night_number := 1
-var hour := 0
+var hour := 5
+
+var max_agression := false
 
 var cpu_temp := 140.0
 var power_usage := 1

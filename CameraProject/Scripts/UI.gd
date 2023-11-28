@@ -4,6 +4,8 @@ extends CanvasLayer
 @onready var CameraRotation = PlayerCamera.rotation_degrees.y
 @onready var flashlight = PlayerCamera.get_node("Flashlight")
 
+@onready var save = $"../Save"
+
 @onready var clock = $"../Clock"
 @onready var insanity_overlay = $InsanityOverlay
 @onready var insanity_anim = $"../InsanityEyes/InsanityAnim"
@@ -44,7 +46,7 @@ func _ready():
 	# and still appears when insanity goes up
 	
 	# Don't know how you'll do it. Have fun!
-
+	
 
 func _input(event):
 	if game_over:
@@ -187,6 +189,7 @@ func load_static():
 	static_anim.play("JumpscareTransition")
 
 func load_night5_end():
+	save.CheckNight()
 	OfficeState.dead = true
 	static_anim.play("Night5End")
 
@@ -199,6 +202,7 @@ func _on_hour_timer_timeout():
 				$PhoneGuy.play("PhoneCall_5End")
 			else:
 				win_anim.play("6AM")
+				save.CheckNight()
 		clock.update_hour()
 		InterfaceMonitor.update_hour()
 		

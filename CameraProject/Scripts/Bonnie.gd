@@ -26,6 +26,8 @@ extends StaticBody3D
 @onready var bonnie_positions = $"../BonniePositions"
 @onready var positions = bonnie_positions.get_children()
 
+@onready var save = $"../Save"
+
 var PositionCameras = [0,1,2,3,7]
 var CurrentPosition = 0
 
@@ -38,14 +40,17 @@ var ready_to_attack := false
 # 12 - night 3
 # 14 - night 4
 # 16 - night 5
-# ? - night 6
+# 18 - night 6
 
 @export var agression :int
 var base_agression :int
 	
 var insanity_inrease = 0.5
 
-func _ready():
+func load_agression():
+	if OfficeState.night_number == 7:
+		agression = save.save.CustomBonnie
+		print("Bonnie Agression Set - ", agression)
 	base_agression = agression
 
 func _physics_process(delta):
@@ -178,3 +183,7 @@ func _on_return_wait_timeout():
 	move_wait.start()
 	disrupt_camera(0)
 	move_cd.start()
+
+
+func _on_agression_wait_timeout():
+	load_agression()

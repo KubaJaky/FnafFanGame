@@ -4,3 +4,4 @@ extends Node3D
 
 func _ready():
 	OfficeState.night_number = night_number
+	print(night_number)

@@ -22,6 +22,8 @@ extends StaticBody3D
 
 @onready var endo_noise = $EndoNoise
 
+@onready var save = $"../Save"
+
 var CurrentPosition = 0
 
 var was_seen := false
@@ -34,7 +36,7 @@ var make_noise := false
 # 10 - night 3
 # 12 - night 4
 # 12 - night 5
-# ? - night 6
+# 14 - night 6
 
 @export var agression :int
 var base_agression :int
@@ -42,6 +44,8 @@ var base_agression :int
 var insanity_inrease = 1
 
 func _ready():
+	if OfficeState.night_number == 7:
+		agression = save.CustomEndo
 	base_agression = agression
 
 func _physics_process(delta):	
