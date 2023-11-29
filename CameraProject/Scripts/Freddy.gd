@@ -48,9 +48,10 @@ var base_agression :int
 
 var insanity_inrease = 0.5
 
-func _ready():
+func load_agression():
 	if OfficeState.night_number == 7:
-		agression = save.CustomFreddy
+		agression = save.save.CustomFreddy
+		print("Freddy Agression Set - ", agression)
 	base_agression = agression
 
 func _physics_process(delta):
@@ -200,3 +201,7 @@ func _on_return_wait_timeout():
 	move_wait.start()
 	disrupt_camera(0)
 	move_cd.start()
+
+
+func _on_agression_wait_timeout():
+	load_agression()

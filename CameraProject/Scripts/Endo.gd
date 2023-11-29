@@ -43,9 +43,10 @@ var base_agression :int
 
 var insanity_inrease = 1
 
-func _ready():
+func load_agression():
 	if OfficeState.night_number == 7:
-		agression = save.CustomEndo
+		agression = save.save.CustomEndo
+		print("Endo Agression Set - ", agression)
 	base_agression = agression
 
 func _physics_process(delta):	
@@ -165,3 +166,7 @@ func _on_return_wait_timeout():
 	move_wait.start()
 	door_anim.play("RESET")
 	move_cd.start()
+
+
+func _on_agression_wait_timeout():
+	load_agression()

@@ -63,13 +63,17 @@ var base_agression :int
 var insanity_inrease = 2
 
 func _ready():
-	if OfficeState.night_number == 7:
-		agression = save.CustomFoxy
-	base_agression = agression
 	choose_route()
 	global_position = positions[CurrentPosition].global_position
 	rotation = positions[CurrentPosition].rotation
 	animation_player.play(position_names[CurrentPosition])
+	
+func load_agression():
+	if OfficeState.night_number == 7:
+		agression = save.save.CustomFoxy
+		print("Foxy Agression Set - ", agression)
+	base_agression = agression
+	
 
 func _physics_process(delta):
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
@@ -273,3 +277,7 @@ func _on_return_wait_timeout():
 	disrupt_camera(0)
 	move_cd.start()
 
+
+
+func _on_agression_wait_timeout():
+	load_agression()

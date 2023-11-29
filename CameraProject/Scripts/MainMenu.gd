@@ -25,17 +25,19 @@ extends Node3D
 @onready var foxy_label = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/TopRow/Foxy/Value/Label
 @onready var endo_label = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/BottomRow/Endo/Value/Label
 
-var bonnie_change := 0
-var chica_change := 0
-var freddy_change := 0
-var foxy_change := 0
-var endo_change := 0
+var change_value := 0.2
 
-var bonnie_value := 0
-var chica_value := 0
-var freddy_value := 0
-var foxy_value := 0
-var endo_value := 0
+var bonnie_change := 0.0
+var chica_change := 0.0
+var freddy_change := 0.0
+var foxy_change := 0.0
+var endo_change := 0.0
+
+var bonnie_value := 0.0
+var chica_value := 0.0
+var freddy_value := 0.0
+var foxy_value := 0.0
+var endo_value := 0.0
 
 var intro_playing = false
 var show_skip = false
@@ -79,27 +81,11 @@ func _process(delta):
 			skip()
 			
 	bonnie_value += bonnie_change
+	chica_value += chica_change
+	freddy_value += freddy_change
+	foxy_value += foxy_change
+	endo_value += endo_change
 
-		
-	if chica_change > 0:
-		chica_value += 1
-	elif chica_change < 0:
-		chica_value -= 1
-	
-	if freddy_change > 0:
-		freddy_value += 1
-	elif freddy_change < 0:
-		freddy_value -= 1
-	
-	if foxy_change > 0:
-		foxy_value += 1
-	elif foxy_change < 0:
-		foxy_value -= 1
-		
-	if endo_change > 0:
-		endo_value += 1
-	elif endo_change < 0:
-		endo_value -= 1
 
 		
 	skip_progress_value = clamp(skip_progress_value, 0, 100)
@@ -111,11 +97,11 @@ func _process(delta):
 	foxy_value = clamp(foxy_value, 0, 20)
 	endo_value = clamp(endo_value, 0, 20)
 	
-	bonnie_label.text = str(bonnie_value)
-	chica_label.text = str(chica_value)
-	freddy_label.text = str(freddy_value)
-	foxy_label.text = str(foxy_value)
-	endo_label.text = str(endo_value)
+	bonnie_label.text = str(int(bonnie_value))
+	chica_label.text = str(int(chica_value))
+	freddy_label.text = str(int(freddy_value))
+	foxy_label.text = str(int(foxy_value))
+	endo_label.text = str(int(endo_value))
 	
 func _on_skip_timer_timeout():
 	skip_gone = true
@@ -166,7 +152,7 @@ func _on_custom_night_back_pressed():
 	menu_anim.play("CustomNightBack")
 	
 func _on_custom_night_start_pressed():
-	save.load_custom_night(bonnie_value, chica_value, freddy_value, foxy_value, endo_value)
+	save.load_custom_night(int(bonnie_value), int(chica_value), int(freddy_value), int(foxy_value), int(endo_value))
 	OfficeState.loading_night = 7
 	menu_anim.play("LoadNight")
 	
@@ -353,46 +339,46 @@ func release_change():
 
 func _on_lower_bonnie_button_down():
 	if bonnie_value > 0:
-		bonnie_change = -1
+		bonnie_change = -change_value
 
 func _on_higher_bonnie_button_down():
 	if bonnie_value < 20:
-		bonnie_change = 1
+		bonnie_change = change_value
 	
 func _on_lower_chica_button_down():
 	if chica_value > 0:
-		chica_change = -1
+		chica_change = -change_value
 
 func _on_higher_chica_button_down():
 	if chica_value < 20:
-		chica_change = 1
+		chica_change = change_value
 	
 	
 func _on_lower_freddy_button_down():
 	if freddy_value > 0:
-		freddy_change = -1
+		freddy_change = -change_value
 
 func _on_higher_freddy_button_down():
 	if freddy_value < 20:
-		freddy_change = 1
+		freddy_change = change_value
 	
 
 func _on_lower_foxy_button_down():
 	if foxy_value > 0:
-		foxy_change = -1
+		foxy_change = -change_value
 
 func _on_higher_foxy_button_down():
 	if foxy_value < 20:
-		foxy_change = 1
+		foxy_change = change_value
 	
 	
 func _on_lower_endo_button_down():
 	if endo_value > 0:
-		endo_change = -1
+		endo_change = -change_value
 
 func _on_higher_endo_button_down():
 	if endo_value < 20:
-		endo_change = 1
+		endo_change = change_value
 
 
 func _on_lower_bonnie_button_up():
