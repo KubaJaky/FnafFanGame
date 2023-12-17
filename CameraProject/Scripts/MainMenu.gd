@@ -6,14 +6,18 @@ extends Node3D
 @onready var misc_buttons = $UI/Menu/MarginContainer/VBoxContainer2/MiscButtons
 @onready var night_buttons = $UI/Menu/MarginContainer/VBoxContainer2/NightSelect
 @onready var reset_save_button = $UI/Menu/MarginContainer/Reset/ResetSave
+@onready var custom_night_back = $UI/Menu/MarginContainer/CustomNight/CustomNightBack
 @onready var skip_progress_bar = $UI/SkipMargin/VBoxContainer/HBoxContainer/SkipProgressBar
 
 @onready var skip_progress = $SkipProgress
 @onready var skip_timer = $SkipTimer
 
+@onready var settings = $UI/Menu/MarginContainer/Settings
+
 @onready var menu_anim = $MenuAnim
 @onready var bg_music = $UI/BGMusic
 @onready var hover_sound = $UI/Menu/Hover
+@onready var click_sound = $UI/Menu/Click
 
 @onready var menu_freddy = $MenuFreddy
 @onready var freddy_anim = menu_freddy.get_node("AnimationPlayer")
@@ -25,7 +29,14 @@ extends Node3D
 @onready var foxy_label = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/TopRow/Foxy/Value/Label
 @onready var endo_label = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/BottomRow/Endo/Value/Label
 
-var change_value := 0.2
+@onready var bonnie_icon = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/TopRow/Bonnie/Icon
+@onready var chica_icon = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/TopRow/Chica/Icon
+@onready var freddy_icon = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/TopRow/Freddy/Icon
+@onready var foxy_icon = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/TopRow/Foxy/Icon
+@onready var endo_icon = $UI/Menu/MarginContainer/CustomNight/AgressionSettings/BottomRow/Endo/Icon
+
+
+var change_value := 0.02
 
 var bonnie_change := 0.0
 var chica_change := 0.0
@@ -44,11 +55,16 @@ var show_skip = false
 var skip_gone = true
 var skip_progress_value :int = 0
 
+func _ready():
+	OfficeState.reset()
+
 func start_intro():
 	intro_playing = true
 
 func start_menu():
 	save.UnlockNights()
+	save.UnlockAchievements()
+	settings.LoadSettings()
 	intro_playing = false
 	freddy_timer.start()
 				
@@ -97,11 +113,32 @@ func _process(delta):
 	foxy_value = clamp(foxy_value, 0, 20)
 	endo_value = clamp(endo_value, 0, 20)
 	
-	bonnie_label.text = str(int(bonnie_value))
-	chica_label.text = str(int(chica_value))
-	freddy_label.text = str(int(freddy_value))
-	foxy_label.text = str(int(foxy_value))
-	endo_label.text = str(int(endo_value))
+	bonnie_icon.material.set_shader_parameter("distort", float(bonnie_value/20)) 
+	bonnie_icon.material.set_shader_parameter("noise", float(bonnie_value/20) - 0.8) 
+	bonnie_icon.material.set_shader_parameter("offset", float(bonnie_value/20)) 
+	
+	chica_icon.material.set_shader_parameter("distort", float(chica_value/20)) 
+	chica_icon.material.set_shader_parameter("noise", float(chica_value/20) - 0.8) 
+	chica_icon.material.set_shader_parameter("offset", float(chica_value/20))
+	
+	freddy_icon.material.set_shader_parameter("distort", float(freddy_value/20)) 
+	freddy_icon.material.set_shader_parameter("noise", float(freddy_value/20) - 0.8) 
+	freddy_icon.material.set_shader_parameter("offset", float(freddy_value/20))
+	
+	foxy_icon.material.set_shader_parameter("distort", float(foxy_value/20)) 
+	foxy_icon.material.set_shader_parameter("noise", float(foxy_value/20) - 0.8) 
+	foxy_icon.material.set_shader_parameter("offset", float(foxy_value/20))
+	
+	endo_icon.material.set_shader_parameter("distort", float(endo_value/20)) 
+	endo_icon.material.set_shader_parameter("noise", float(endo_value/20) - 0.8) 
+	endo_icon.material.set_shader_parameter("offset", float(endo_value/20)) 
+	
+	bonnie_label.text = str(" ", int(bonnie_value), " ")
+	chica_label.text = str(" ", int(chica_value), " ")
+	freddy_label.text = str(" ", int(freddy_value), " ")
+	foxy_label.text = str(" ", int(foxy_value), " ")
+	endo_label.text = str(" ", int(endo_value), " ")
+	
 	
 func _on_skip_timer_timeout():
 	skip_gone = true
@@ -158,6 +195,14 @@ func _on_custom_night_start_pressed():
 	
 func _on_back_pressed():
 	menu_anim.play("NightSelectBack")
+
+func _on_settings_pressed():
+	misc_buttons.get_child(0).text = misc_buttons.get_child(0).text.replace(">", "")
+	menu_anim.play("Settings")
+	
+func _on_settings_back_pressed():
+	save.save_data()
+	menu_anim.play("SettingsBack")
 	
 func _on_exit_pressed():
 	get_tree().quit()
@@ -218,10 +263,11 @@ func _on_new_game_mouse_exited():
 
 
 func _on_continue_mouse_entered():
-	add_arrow(1)
+	play_buttons.get_child(1).text = "> " + str(save.get_night_continue()) + " | " + play_buttons.get_child(1).text
+	hover_sound.play()
 
 func _on_continue_mouse_exited():
-	remove_arrow(1)
+	play_buttons.get_child(1).text = play_buttons.get_child(1).text.replace("> " + str(save.get_night_continue()) + " | ", "")
 
 
 func _on_night_select_mouse_entered():
@@ -262,6 +308,15 @@ func _on_reset_save_mouse_entered():
 func _on_reset_save_mouse_exited():
 	reset_save_button.text = reset_save_button.text.replace("• ", "")
 	reset_save_button.add_theme_color_override("font_outline_color", "858585")
+
+
+func _on_custom_night_back_mouse_entered():
+	custom_night_back.text = ">" + custom_night_back.text
+	hover_sound.play()
+
+func _on_custom_night_back_mouse_exited():
+	custom_night_back.text = custom_night_back.text.replace(">", "")
+
 
 func _on_night_1_mouse_entered():
 	if !night_buttons.get_child(0).disabled:
@@ -326,6 +381,8 @@ func _on_back_mouse_exited():
 
 
 func release_change():
+	click_sound.stream.loop = false
+	change_value = 0.02
 	if bonnie_change != 0:
 		bonnie_change = 0
 	if chica_change != 0:
@@ -340,46 +397,75 @@ func release_change():
 func _on_lower_bonnie_button_down():
 	if bonnie_value > 0:
 		bonnie_change = -change_value
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
 
 func _on_higher_bonnie_button_down():
 	if bonnie_value < 20:
 		bonnie_change = change_value
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
 	
 func _on_lower_chica_button_down():
 	if chica_value > 0:
 		chica_change = -change_value
-
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
+	
 func _on_higher_chica_button_down():
 	if chica_value < 20:
 		chica_change = change_value
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
 	
-	
+
 func _on_lower_freddy_button_down():
 	if freddy_value > 0:
 		freddy_change = -change_value
-
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
+	
 func _on_higher_freddy_button_down():
 	if freddy_value < 20:
 		freddy_change = change_value
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
 	
 
 func _on_lower_foxy_button_down():
 	if foxy_value > 0:
 		foxy_change = -change_value
-
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
+	
 func _on_higher_foxy_button_down():
 	if foxy_value < 20:
 		foxy_change = change_value
-	
-	
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
+		
 func _on_lower_endo_button_down():
 	if endo_value > 0:
 		endo_change = -change_value
-
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
+	
 func _on_higher_endo_button_down():
 	if endo_value < 20:
 		endo_change = change_value
-
+		change_value += 0.02
+		click_sound.stream.loop = true
+		click_sound.play()
+	
 
 func _on_lower_bonnie_button_up():
 	release_change()
@@ -410,5 +496,4 @@ func _on_lower_endo_button_up():
 	
 func _on_higher_endo_button_up():
 	release_change()
-	
 	

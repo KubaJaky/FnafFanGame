@@ -1,5 +1,21 @@
 extends CanvasLayer
 
+@onready var spot_light_3d = $"../Office/Props/Stage/SpotLight3D"
+@onready var spot_light_3d_2 = $"../Office/Props/Stage/SpotLight3D2"
+@onready var spot_light_3d_3 = $"../Office/Props/Stage/SpotLight3D3"
+@onready var spot_light_3d_8 = $"../Office/Props/BackStage/SpotLight3D"
+@onready var spot_light_3d_4 = $"../Office/Props/BackStage/SpotLight3D2"
+@onready var spot_light_3d_5 = $"../Office/Props/BackStage/SpotLight3D3"
+@onready var spot_light_3d_6 = $"../Office/Props/BackStage/SpotLight3D4"
+@onready var spot_light_3d_7 = $"../Office/Props/BackStage/SpotLight3D5"
+@onready var spot_light_3d_9 = $"../Office/Props/Arcade/SpotLight3D"
+@onready var omni_light_3d = $"../Office/Props/Kitchen/Fridge/OmniLight3D"
+@onready var omni_light_3d_2 = $"../Office/Props/Kitchen/Fridge/OmniLight3D2"
+@onready var omni_light_3d_3 = $"../Office/Props/Kitchen/Fridge/OmniLight3D3"
+@onready var omni_light_3d_4 = $"../OfficeLamp/OmniLight3D"
+
+@onready var post_process = $"../PostProcess"
+
 @onready var PlayerCamera = $"../Player/Camera3D"
 @onready var CameraRotation = PlayerCamera.rotation_degrees.y
 @onready var flashlight = PlayerCamera.get_node("Flashlight")
@@ -46,12 +62,13 @@ func _ready():
 	# and still appears when insanity goes up
 	
 	# Don't know how you'll do it. Have fun!
+
 	
 
 func _input(event):
 	if game_over:
 		if event is InputEventKey or event is InputEventMouseButton and event.pressed:
-			get_tree().quit()
+			get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 
 func _physics_process(delta):
 	
@@ -206,6 +223,34 @@ func _on_hour_timer_timeout():
 		clock.update_hour()
 		InterfaceMonitor.update_hour()
 		
+func _on_date_timer_timeout():
+	if save.save.Shadows == false:
+		spot_light_3d.shadow_enabled = false
+		spot_light_3d_2.shadow_enabled = false
+		spot_light_3d_3.shadow_enabled = false
+		spot_light_3d_4.shadow_enabled = false
+		spot_light_3d_5.shadow_enabled = false
+		spot_light_3d_6.shadow_enabled = false
+		spot_light_3d_7.shadow_enabled = false
+		spot_light_3d_8.shadow_enabled = false
+		spot_light_3d_9.shadow_enabled = false
+		omni_light_3d.shadow_enabled = false
+		omni_light_3d_2.shadow_enabled = false
+		omni_light_3d_3.shadow_enabled = false
+		omni_light_3d_4.shadow_enabled = false
+		flashlight.shadow_enabled = false
+			
+	if save.save.VolFog == false:
+		post_process.environment.volumetric_fog_enabled = false
+		
+	if save.save.Brightness != 1.0:
+		post_process.environment.adjustment_enabled = true
+		post_process.environment.set_adjustment_brightness(save.save.Brightness)
+		post_process.environment.set_adjustment_contrast(1.0)
+		post_process.environment.set_adjustment_saturation(1.0)
+		
+	insanity_overlay.visible = true
+		
 func ur_fucked():
 	$"../Bonnie".base_agression = 0
 	$"../Chica".base_agression = 0
@@ -215,7 +260,18 @@ func ur_fucked():
 	OfficeState.power_left = 0
 	
 func next_night():
-	get_tree().quit()
+	if OfficeState.night_number == 5:
+		get_tree().change_scene_to_file("res://Scenes/CallCutsceneNight5.tscn")
+	elif OfficeState.night_number == 7:
+		get_tree().change_scene_to_file("res://Scenes/CallCutsceneNight7.tscn")
+	elif OfficeState.night_number < 7:
+		OfficeState.loading_night = OfficeState.night_number + 1
+		print("Next Night - ", OfficeState.loading_night)
+		get_tree().change_scene_to_file("res://Scenes/LoadingScreen.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 
 func game_over_screen():
 	game_over = true
+
+

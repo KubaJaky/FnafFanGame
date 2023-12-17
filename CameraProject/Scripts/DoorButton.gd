@@ -11,6 +11,7 @@ extends StaticBody3D
 @onready var left_open_sound = $"../SecurityDoorLeft/DoorOpen"
 @onready var button_anim = $ButtonAnim
 @onready var button_sound = $ButtonSound
+@onready var omni_light_3d = $OmniLight3D
 
 @onready var close_delay_left = Timer.new()
 @onready var close_delay_right = Timer.new()
@@ -93,3 +94,6 @@ func left_close_door_sound():
 	
 func right_close_door_sound():
 	right_close_sound.play()
+	
+func turn_off_shadow():
+	omni_light_3d.shadow_enabled = false

@@ -5,7 +5,15 @@ var save = {
 	"FiveTwenty":false,
 	"SfxVolume":0.0,
 	"MusicVolume":0.0,
+	"AmbienceVolume":0.0,
 	"CallVolume":0.0,
+	"CutsceneVolume":0.0,
+	"ResolutionId":0,
+	"VSync":false,
+	"Fullscreen":false,
+	"Brightness":1.0,
+	"VolFog":true,
+	"Shadows":true,
 	"CustomBonnie":0,
 	"CustomChica":0,
 	"CustomFreddy":0,
@@ -79,7 +87,10 @@ func UnlockAchievements():
 		badges.get_child(3).visible = true
 		
 func get_night_continue():
-	return save.BestNight + 1
+	if save.BestNight < 6:
+		return save.BestNight + 1
+	else:
+		return 6
 	
 func CheckNight():
 	if OfficeState.night_number > save.BestNight:

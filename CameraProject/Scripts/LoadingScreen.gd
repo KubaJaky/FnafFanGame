@@ -10,6 +10,7 @@ var scene_load_status = 0
 var loading_scene := false
 
 func _ready():
+	OfficeState.reset()
 	sceneName = "res://Scenes/Night" + str(OfficeState.loading_night) + ".tscn"
 	ResourceLoader.load_threaded_request(sceneName)
 	transition.play_backwards("Fade")
