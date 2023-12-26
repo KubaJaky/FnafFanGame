@@ -52,16 +52,18 @@ var insanity_eyes := false
 var game_over := false
 
 func _ready():
-	$EyelidTop.size = DisplayServer.window_get_size()
-	$EyelidBot.size = DisplayServer.window_get_size()
-	$EyelidFill.size = DisplayServer.window_get_size()
-	print(DisplayServer.window_get_size(), " - ", $EyelidTop.size, " / ", $EyelidBot.size, " / ", $EyelidFill.size)
+	$EyelidTop.size = Vector2(1920,1071) #DisplayServer.window_get_size()
+	$EyelidBot.size = Vector2(1920,1071) #DisplayServer.window_get_size()
+	$EyelidFill.size = Vector2(1920,1071) #DisplayServer.window_get_size()
+	#print(DisplayServer.window_get_size(), " - ", $EyelidTop.size, " / ", $EyelidBot.size, " / ", $EyelidFill.size)
 	$InsanityOverlay.visible = true
 	$InsanityOverlay.modulate = "ffffff00"
 	# Fix this /\ so it doesn't appear at the start of the night
 	# and still appears when insanity goes up
 	
 	# Don't know how you'll do it. Have fun!
+	
+	# You son of a bitch, you did it.
 
 	
 
@@ -75,8 +77,12 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("FullScreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+			save.save.Fullscreen = true
+			save.save_data()
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			save.save.Fullscreen = false
+			save.save_data()
 	
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
 	
@@ -204,6 +210,8 @@ func mute_background():
 func load_static():
 	OfficeState.dead = true
 	static_anim.play("JumpscareTransition")
+	if $PhoneGuy.is_playing():
+		$PhoneGuy.stop()
 
 func load_night5_end():
 	save.CheckNight()
@@ -220,6 +228,7 @@ func _on_hour_timer_timeout():
 			else:
 				win_anim.play("6AM")
 				save.CheckNight()
+				save.FiveTwentyBeaten()
 		clock.update_hour()
 		InterfaceMonitor.update_hour()
 		
@@ -249,7 +258,6 @@ func _on_date_timer_timeout():
 		post_process.environment.set_adjustment_contrast(1.0)
 		post_process.environment.set_adjustment_saturation(1.0)
 		
-	insanity_overlay.visible = true
 		
 func ur_fucked():
 	$"../Bonnie".base_agression = 0
@@ -263,7 +271,7 @@ func next_night():
 	if OfficeState.night_number == 5:
 		get_tree().change_scene_to_file("res://Scenes/CallCutsceneNight5.tscn")
 	elif OfficeState.night_number == 7:
-		get_tree().change_scene_to_file("res://Scenes/CallCutsceneNight7.tscn")
+		get_tree().change_scene_to_file("res://Scenes/PreNight7Cutscene.tscn")
 	elif OfficeState.night_number < 7:
 		OfficeState.loading_night = OfficeState.night_number + 1
 		print("Next Night - ", OfficeState.loading_night)

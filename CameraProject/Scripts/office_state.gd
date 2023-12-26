@@ -1,5 +1,7 @@
 extends Node
 
+var reset_save := false
+
 var flashlight_on := false
 var in_cameras := false
 var in_fusebox := false

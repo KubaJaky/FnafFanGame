@@ -8,6 +8,9 @@ extends Node3D
 @onready var reset_save_button = $UI/Menu/MarginContainer/Reset/ResetSave
 @onready var custom_night_back = $UI/Menu/MarginContainer/CustomNight/CustomNightBack
 @onready var skip_progress_bar = $UI/SkipMargin/VBoxContainer/HBoxContainer/SkipProgressBar
+@onready var reset_buttons = $UI/ResetSaveBackground/ResetSavePopup/Panel/MarginContainer/Content/Buttons
+@onready var reset_save_background = $UI/ResetSaveBackground
+
 
 @onready var skip_progress = $SkipProgress
 @onready var skip_timer = $SkipTimer
@@ -53,7 +56,7 @@ var endo_value := 0.0
 var intro_playing = false
 var show_skip = false
 var skip_gone = true
-var skip_progress_value :int = 0
+var skip_progress_value :float = 0.0
 
 func _ready():
 	OfficeState.reset()
@@ -72,8 +75,12 @@ func _process(delta):
 	if Input.is_action_just_pressed("FullScreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+			save.save.Fullscreen = true
+			save.save_data()
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			save.save.Fullscreen = false
+			save.save_data()
 	
 	if intro_playing:
 		if Input.is_action_just_pressed("CalmDown"):
@@ -84,16 +91,22 @@ func _process(delta):
 				skip_progress.play("Appear")
 		if Input.is_action_pressed("CalmDown"):
 			if show_skip:
-				skip_progress_value += 1
+				if save.save.VSync:
+					skip_progress_value += 1
+				else:
+					skip_progress_value += 0.2
 				
 		if !Input.is_action_pressed("CalmDown") and skip_progress_value > 0:
-			skip_progress_value -= 4
+			if save.save.VSync:
+				skip_progress_value -= 4
+			else:
+				skip_progress_value -= 0.6
 			
 		if skip_progress_value <= 0 and show_skip and skip_gone:
 			show_skip = false
 			skip_progress.play_backwards("Appear")
 			
-		if skip_progress_value == 100 and show_skip:
+		if skip_progress_value >= 100 and show_skip:
 			skip()
 			
 	bonnie_value += bonnie_change
@@ -238,6 +251,22 @@ func _on_night_6_pressed():
 	menu_anim.play("LoadNight")
 	
 	
+func _on_reset_save_pressed():
+	reset_save_background.visible = true
+	
+func _on_unlock_all_pressed():
+	save.save.BestNight = 7
+	save.save_data()
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+
+func _on_yes_pressed():
+	save.reset_data()
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+
+func _on_no_pressed():
+	reset_save_background.visible = false
+
+	
 
 func add_arrow(button_id):
 	play_buttons.get_child(button_id).text = ">" + play_buttons.get_child(button_id).text
@@ -377,6 +406,27 @@ func _on_back_mouse_exited():
 	remove_arrow_night(7)
 	
 
+func _on_settings_back_mouse_entered():
+	settings.get_child(1).text = ">" + settings.get_child(1).text
+	hover_sound.play()
+	
+func _on_settings_back_mouse_exited():
+	settings.get_child(1).text = settings.get_child(1).text.replace(">", "")
+	
+func _on_yes_mouse_entered():
+	reset_buttons.get_child(0).text = ">" + reset_buttons.get_child(0).text
+	hover_sound.play()
+
+func _on_yes_mouse_exited():
+	reset_buttons.get_child(0).text = reset_buttons.get_child(0).text.replace(">", "")
+
+
+func _on_no_mouse_entered():
+	reset_buttons.get_child(1).text = ">" + reset_buttons.get_child(1).text
+	hover_sound.play()
+	
+func _on_no_mouse_exited():
+	reset_buttons.get_child(1).text = reset_buttons.get_child(1).text.replace(">", "")
 
 
 
@@ -497,3 +547,7 @@ func _on_lower_endo_button_up():
 func _on_higher_endo_button_up():
 	release_change()
 	
+func _on_noise_finished():
+	$UI/Noise.play()
+
+

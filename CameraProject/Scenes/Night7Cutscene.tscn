@@ -1,0 +1,1144 @@
+[gd_scene load_steps=16 format=3 uid="uid://c4dt38wksdas8"]
+
+[ext_resource type="Script" path="res://Scripts/Night7Cutscene.gd" id="1_cjt05"]
+[ext_resource type="VideoStream" path="res://Graphics/Night7Cutscene.ogv" id="2_xv55s"]
+[ext_resource type="FontFile" uid="uid://clccasuj4g5l2" path="res://Fonts/Raleway-Regular.ttf" id="3_5xuc4"]
+[ext_resource type="AudioStream" uid="uid://ce0ee0xi0tqnn" path="res://SoundEffects/CutsceneAudio/Night7Cutscene.mp3" id="3_7dtw7"]
+[ext_resource type="AudioStream" uid="uid://dxcx7iestgeak" path="res://SoundEffects/Music/soundscrate-solemn-state.wav" id="4_w8s3e"]
+[ext_resource type="Texture2D" uid="uid://co3t03ldghyu7" path="res://Graphics/FreddyIconTransparent.png" id="5_rcxpw"]
+[ext_resource type="FontFile" uid="uid://deuqgpocpcysn" path="res://Fonts/PixelFJVerdana12pt.ttf" id="6_umlop"]
+
+[sub_resource type="Animation" id="Animation_q0po8"]
+resource_name = "Credits"
+length = 65.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CreditsMusic:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsMusic:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 6, 57, 60.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-40.0, 0.0, 0.0, -40.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Credits/MarginContainer/VBoxContainer/TitleScreen:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(7.9, 8, 16, 16.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Credits/MarginContainer/VBoxContainer/TitleScreen:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(8, 10, 15, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits1:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(16.9, 17, 29, 29.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits1:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(17, 18, 28.5, 29),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits2:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(29.9, 30, 38, 38.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits2:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(30, 31, 37, 38),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits3:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(38.9, 39, 49, 49.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits3:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(39, 40, 48, 49),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Credits/MarginContainer/VBoxContainer/ThankYou:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(49.9, 50, 59, 59.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Credits/MarginContainer/VBoxContainer/ThankYou:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(50, 52, 57, 59),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath(".")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(65),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_cutscene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_v2203"]
+resource_name = "EndTransition"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_cutscene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bxy3w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CreditsMusic:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsMusic:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Credits/MarginContainer/VBoxContainer/TitleScreen:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Credits/MarginContainer/VBoxContainer/TitleScreen:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits1:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits1:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits2:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits2:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits3:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Credits/MarginContainer/VBoxContainer/Credits3:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Credits/MarginContainer/VBoxContainer/ThankYou:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Credits/MarginContainer/VBoxContainer/ThankYou:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("CutsceneAudio:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_egkv3"]
+resource_name = "Transition"
+length = 76.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 75.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"subtitles"
+}, {
+"args": [],
+"method": &"credits"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CutsceneAudio:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iis1l"]
+_data = {
+"Credits": SubResource("Animation_q0po8"),
+"EndTransition": SubResource("Animation_v2203"),
+"RESET": SubResource("Animation_bxy3w"),
+"Transition": SubResource("Animation_egkv3")
+}
+
+[sub_resource type="Animation" id="Animation_r7oqo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Subtitles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Subtitles:lines_skipped")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1pk67"]
+resource_name = "Subtitles"
+length = 76.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Subtitles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 10.5, 11.5, 26, 27, 44.9, 46),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Subtitles:lines_skipped")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.2, 2.5, 7.1, 8.3, 28, 29.9, 32.1, 35, 37.2, 42.9, 44.2, 46),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drrea"]
+_data = {
+"RESET": SubResource("Animation_r7oqo"),
+"Subtitles": SubResource("Animation_1pk67")
+}
+
+[node name="SpringBonnieCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cjt05")
+
+[node name="Background" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_xv55s")
+volume_db = -80.0
+expand = true
+
+[node name="CutsceneAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7dtw7")
+bus = &"Cutscenes"
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+autoplay = "Transition"
+libraries = {
+"": SubResource("AnimationLibrary_iis1l")
+}
+
+[node name="SubtitlesAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_drrea")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Subtitles" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2928.0
+offset_top = -90.0
+offset_right = 2928.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5xuc4")
+theme_override_font_sizes/font_size = 28
+text = "
+I have to hide somewhere.
+No.
+
+Ally... 
+you know I can't let you go. 
+You know too much.
+I know enough, William.
+[laugh]
+Burn in hell.
+What?
+
+no... no.
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="ColorRect" type="ColorRect" parent="Subtitles"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.443137)
+
+[node name="CreditsMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_w8s3e")
+bus = &"Music"
+
+[node name="Credits" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleScreen" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Credits/MarginContainer/VBoxContainer/TitleScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_rcxpw")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Credits/MarginContainer/VBoxContainer/TitleScreen"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 50
+text = "Nightshift Chronicles : Freddy's"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="author" type="Label" parent="Credits/MarginContainer/VBoxContainer/TitleScreen"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.635294, 0.635294, 0.635294, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 35
+text = "by Kubajaky"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits1" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Label" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Graphics"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits1"]
+layout_mode = 2
+theme_override_constants/separation = 86
+alignment = 1
+
+[node name="1" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content"]
+layout_mode = 2
+
+[node name="category" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Models"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="person" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Spring Bonnie Port - RazvanAndrei123"
+vertical_alignment = 1
+
+[node name="person4" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Spring Bonnie Model - Thunder"
+vertical_alignment = 1
+
+[node name="person6" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Spring Bonnie Model - GamesProduction"
+vertical_alignment = 1
+
+[node name="person5" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Spring Bonnie Model - T.M."
+vertical_alignment = 1
+
+[node name="person2" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Other Animatronic Ports - BTBAnimations"
+vertical_alignment = 1
+
+[node name="person7" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Other Animatronic Ports - AlfredMan20"
+vertical_alignment = 1
+
+[node name="person3" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Furniture and other assets - KubaJaky"
+vertical_alignment = 1
+
+[node name="2" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content"]
+layout_mode = 2
+
+[node name="category" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Animations"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="person" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Asset animations - KubaJaky"
+vertical_alignment = 1
+
+[node name="person2" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Animatronic animations - KubaJaky"
+vertical_alignment = 1
+
+[node name="person3" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits1/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Cutscene animations - KubaJaky"
+vertical_alignment = 1
+
+[node name="Credits2" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Label" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Audio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits2"]
+layout_mode = 2
+theme_override_constants/separation = 86
+alignment = 1
+
+[node name="1" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content"]
+layout_mode = 2
+
+[node name="category" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="person" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "The Future Is Bleak (Trimmed) - SoundCrate"
+vertical_alignment = 1
+
+[node name="person4" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Solemn State - SoundCrate"
+vertical_alignment = 1
+
+[node name="2" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content"]
+layout_mode = 2
+
+[node name="category" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Voice Acting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="person" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "William Afton - KubaJaky"
+vertical_alignment = 1
+
+[node name="person4" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "The Engineer - KubaJaky"
+vertical_alignment = 1
+
+[node name="person2" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Ally - @6Liv_the_ghost9 (Twitter/X)"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/2"]
+layout_mode = 2
+
+[node name="person3" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits2/Content/2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "911 Operator - Thiccpumpkin (YT)"
+vertical_alignment = 1
+
+[node name="Credits3" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="Label" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Misc"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits3"]
+layout_mode = 2
+theme_override_constants/separation = 86
+alignment = 1
+
+[node name="1" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content"]
+layout_mode = 2
+
+[node name="category" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Testing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="person" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Testing - ( Your name here :] )"
+vertical_alignment = 1
+
+[node name="person2" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Testing - ( Tell me on Discord )"
+vertical_alignment = 1
+
+[node name="person3" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Testing - ( What name you )"
+vertical_alignment = 1
+
+[node name="person4" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Testing - ( Want me to put )"
+vertical_alignment = 1
+
+[node name="person5" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Testing - ( In here)"
+vertical_alignment = 1
+
+[node name="2" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content"]
+layout_mode = 2
+
+[node name="category" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 40
+text = "Other"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="person" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Programming - KubaJaky"
+vertical_alignment = 1
+
+[node name="person4" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "UI Design - KubaJaky
+"
+vertical_alignment = 1
+
+[node name="person6" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Video Editing - KubaJaky"
+vertical_alignment = 1
+
+[node name="person5" type="Label" parent="Credits/MarginContainer/VBoxContainer/Credits3/Content/2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.584314, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 20
+text = "Advice - @Rafiozo 
+(Itch.io/Gamejolt)"
+vertical_alignment = 1
+
+[node name="ThankYou" type="VBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Credits/MarginContainer/VBoxContainer/ThankYou"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_rcxpw")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Credits/MarginContainer/VBoxContainer/ThankYou"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("6_umlop")
+theme_override_font_sizes/font_size = 50
+text = "Thank You
+ For Playing !"
+horizontal_alignment = 1
+vertical_alignment = 1

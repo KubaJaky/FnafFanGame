@@ -60,6 +60,8 @@ var blinded := false
 @export var agression :int
 var base_agression :int
 
+var agression_loaded :bool = false
+
 var insanity_inrease = 2
 
 func _ready():
@@ -73,10 +75,11 @@ func load_agression():
 		agression = save.save.CustomFoxy
 		print("Foxy Agression Set - ", agression)
 	base_agression = agression
+	agression_loaded = true
 	
 
 func _physics_process(delta):
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6 and agression_loaded:
 		if OfficeState.hour < 3:
 			agression = base_agression - (8 + OfficeState.night_number)
 		elif agression != base_agression:
@@ -247,11 +250,13 @@ func jumpscare():
 		body.visible = true
 		animation_player.speed_scale = 2
 		state_anim.speed_scale = 2
-		animation_player.play("Jumpscare")
+		if save.save.JumpscaresOn:
+			animation_player.play("Jumpscare")
 		state_anim.play("JumpscareState")
 		
 func jumpscare_sound():
-	player.jumpscare_sound.play()
+	if save.save.JumpscaresOn:
+		player.jumpscare_sound.play()
 				
 func end_jumpscare():
 	if !OfficeState.hour >= 6:

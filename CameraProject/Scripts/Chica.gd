@@ -45,16 +45,18 @@ var ready_to_attack := false
 @export var agression :int
 var base_agression :int
 
+var agression_loaded :bool = false
+
 var insanity_inrease = 0.5
 
 func load_agression():
 	if OfficeState.night_number == 7:
 		agression = save.save.CustomChica
-		print("Chica Agression Set - ", agression)
 	base_agression = agression
+	agression_loaded = true
 
 func _physics_process(delta):
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6 and agression_loaded:
 		if OfficeState.hour < 2:
 			agression = base_agression - (5 + OfficeState.night_number)
 		elif agression != base_agression:
@@ -142,7 +144,6 @@ func disrupt_camera(move):
 	
 func jumpscare():
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
-		global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosRight").global_position
 		if OfficeState.in_cameras:
 			OfficeState.in_cameras = false
 			player_cam_anim.speed_scale = 2
@@ -159,11 +160,14 @@ func jumpscare():
 		body.visible = true
 		animation_player.speed_scale = 1
 		state_anim.speed_scale = 1
-		animation_player.play("Jumpscare")
+		if save.save.JumpscaresOn:
+			global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosRight").global_position
+			animation_player.play("Jumpscare")
 		state_anim.play("JumpscareState")
 		
 func jumpscare_sound():
-	player.jumpscare_sound.play()
+	if save.save.JumpscaresOn:
+		player.jumpscare_sound.play()
 		
 func end_jumpscare():
 	if !OfficeState.hour >= 6:

@@ -44,6 +44,8 @@ var ready_to_attack := false
 
 @export var agression :int
 var base_agression :int
+
+var agression_loaded :bool = false
 	
 var insanity_inrease = 0.5
 
@@ -52,9 +54,11 @@ func load_agression():
 		agression = save.save.CustomBonnie
 		print("Bonnie Agression Set - ", agression)
 	base_agression = agression
+	agression_loaded = true # add this to everyone else
 
 func _physics_process(delta):
-	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6:
+	# print(" Bonnie Agression - ", agression, "/", base_agression)
+	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.hour >= 6 and agression_loaded:
 		if OfficeState.hour < 1:
 			agression = base_agression - (5 + OfficeState.night_number)
 		elif agression != base_agression:
@@ -156,14 +160,19 @@ func jumpscare():
 		body.visible = true
 		animation_player.speed_scale = 1
 		state_anim.speed_scale = 1
-		animation_player.play("Jumpscare")
+		if save.save.JumpscaresOn:  # this may bug the jumpscares when they're on
+			global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosLeft").global_position
+			animation_player.play("Jumpscare")
 		state_anim.play("JumpscareState")
-		global_position = player_cam_anim.get_parent().get_parent().get_node("JumpscarePosLeft").global_position
 		# /\ This was in line 130, try it out.
 		# Should fix the weird position before jumpscare issue
 		
+		# It's not 130 anymore, son. 
+		# You forgot you'll change this code in the future, stupid.
+		
 func jumpscare_sound():
-	player.jumpscare_sound.play()
+	if save.save.JumpscaresOn:
+		player.jumpscare_sound.play()
 		
 func end_jumpscare():
 	if !OfficeState.hour >= 6:

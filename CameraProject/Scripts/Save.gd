@@ -10,10 +10,11 @@ var save = {
 	"CutsceneVolume":0.0,
 	"ResolutionId":0,
 	"VSync":false,
-	"Fullscreen":false,
+	"Fullscreen":true,
 	"Brightness":1.0,
 	"VolFog":true,
 	"Shadows":true,
+	"JumpscaresOn":true,
 	"CustomBonnie":0,
 	"CustomChica":0,
 	"CustomFreddy":0,
@@ -25,15 +26,47 @@ var save = {
 var in_menu := false
 var in_game := true
 
+var resolutions = [Vector2(1920,1080),Vector2(1600,900),Vector2(1366,768),Vector2(1280,720),Vector2(854,480),Vector2(640,360)]
+
 # do not try to save in _ready, it doesn't work
 func _ready():
-	if save.ResetSave == true:
+	if OfficeState.reset_save:
 		save_data()
+		OfficeState.reset_save = false
+		print("Save Reset")
 	print("1")
 	print(save)
 	load_data()
 	print("2")
 	print(save)
+	AudioServer.set_bus_volume_db(1, save.SfxVolume)
+	AudioServer.set_bus_volume_db(2, save.SfxVolume)
+	AudioServer.set_bus_volume_db(3, save.SfxVolume)
+	AudioServer.set_bus_volume_db(4, save.SfxVolume)
+	AudioServer.set_bus_volume_db(5, save.AmbienceVolume)
+	AudioServer.set_bus_volume_db(6, save.MusicVolume)
+	AudioServer.set_bus_volume_db(7, save.CallVolume)
+	AudioServer.set_bus_volume_db(8, save.CutsceneVolume)
+	
+	DisplayServer.window_set_size(resolutions[save.ResolutionId])
+	
+	if save.Fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
+	
+	if save.VSync:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		
+
+	if OfficeState.loading_night == 7:
+		if save.CustomBonnie == 20 and save.CustomChica == 20 and save.CustomFreddy == 20 and save.CustomFoxy == 20 and save.CustomEndo == 20:
+			OfficeState.max_agression = true
+		else:
+			OfficeState.max_agression = false
 	
 
 # saves everyhing in the "save" variable
@@ -58,6 +91,11 @@ func load_data():
 		save = file.get_var()
 		print(save)
 		file.close()
+		
+func reset_data():
+	save.ResetSave = true
+	save_data()
+	OfficeState.reset_save = true
 	
 func UnlockNights():
 	var night_select = $"../UI/Menu/MarginContainer/VBoxContainer2/NightSelect"

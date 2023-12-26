@@ -456,6 +456,7 @@ libraries = {
 [node name="Call" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_om63e")
 volume_db = -5.0
+bus = &"Cutscenes"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
