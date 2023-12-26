@@ -13,4 +13,5 @@ func _on_background_finished():
 	background.play()
 	
 func end_cutscene():
-	get_tree().change_scene_to_file("res://Scenes/Night7Cutscene.tscn")
+	OfficeState.loading_night = 6
+	get_tree().change_scene_to_file("res://Scenes/LoadingScreen.tscn")

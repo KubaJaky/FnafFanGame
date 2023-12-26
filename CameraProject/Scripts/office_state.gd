@@ -12,7 +12,7 @@ var dead := false
 
 var loading_night := 0
 var night_number := 1
-var hour := 5 # change to 0 later
+var hour := 0 # change to 0 later
 
 var max_agression := false
 
@@ -63,7 +63,7 @@ func reset():
 	in_jumpscare = false
 	dead = false
 
-	hour = 5 # change to 0 later
+	hour = 0 # change to 0 later
 
 	max_agression = false
 
