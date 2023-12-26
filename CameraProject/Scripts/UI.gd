@@ -151,6 +151,11 @@ func _physics_process(delta):
 				elif int(PlayerCamera.rotation_degrees.y) == 90:
 					CameraRotation = 0.0
 					OfficeState.looking_left = false
+					
+		if Input.is_action_just_pressed("EZ"): # DEBUG TOOL
+			OfficeState.hour = 5
+			clock.update_hour()
+			$"../Monitor2".update_hour()
 	
 func _on_panel_mouse_entered():
 	if !OfficeState.in_jumpscare and !OfficeState.dead and !OfficeState.eyes_closed:
@@ -270,6 +275,8 @@ func ur_fucked():
 func next_night():
 	if OfficeState.night_number == 5:
 		get_tree().change_scene_to_file("res://Scenes/CallCutsceneNight5.tscn")
+	elif OfficeState.night_number == 6:
+		get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 	elif OfficeState.night_number == 7:
 		get_tree().change_scene_to_file("res://Scenes/PreNight7Cutscene.tscn")
 	elif OfficeState.night_number < 7:

@@ -91,16 +91,10 @@ func _process(delta):
 				skip_progress.play("Appear")
 		if Input.is_action_pressed("CalmDown"):
 			if show_skip:
-				if save.save.VSync:
-					skip_progress_value += 1
-				else:
-					skip_progress_value += 0.2
+				skip_progress_value += delta * 200
 				
 		if !Input.is_action_pressed("CalmDown") and skip_progress_value > 0:
-			if save.save.VSync:
-				skip_progress_value -= 4
-			else:
-				skip_progress_value -= 0.6
+			skip_progress_value -= delta * 400
 			
 		if skip_progress_value <= 0 and show_skip and skip_gone:
 			show_skip = false
@@ -109,11 +103,11 @@ func _process(delta):
 		if skip_progress_value >= 100 and show_skip:
 			skip()
 			
-	bonnie_value += bonnie_change
-	chica_value += chica_change
-	freddy_value += freddy_change
-	foxy_value += foxy_change
-	endo_value += endo_change
+	bonnie_value += (bonnie_change * 600) * delta
+	chica_value += (chica_change * 600) * delta
+	freddy_value += (freddy_change * 600) * delta
+	foxy_value += (foxy_change * 600) * delta
+	endo_value += (endo_change * 600) * delta
 
 
 		
