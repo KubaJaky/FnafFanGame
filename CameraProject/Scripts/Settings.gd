@@ -48,6 +48,8 @@ func LoadSettings():
 func _on_resolution_item_selected(index):
 	get_viewport().size = resolutions[index]
 	DisplayServer.window_set_size(resolutions[index])
+	DisplayServer.window_set_position(DisplayServer.screen_get_size()/8)
+	
 	save.save.ResolutionId = index
 
 

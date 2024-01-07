@@ -22,6 +22,9 @@ extends CanvasLayer
 
 @onready var save = $"../Save"
 
+@onready var quit_text = $QuitMargin/QuitText
+@onready var quit_timer = $QuitMargin/QuitTimer
+
 @onready var clock = $"../Clock"
 @onready var insanity_overlay = $InsanityOverlay
 @onready var insanity_anim = $"../InsanityEyes/InsanityAnim"
@@ -41,6 +44,8 @@ extends CanvasLayer
 @onready var stinger_sound = $Stinger
 @onready var jumpscare_sound = $Jumpscare
 @onready var jumpscare_short = $JumpscareShort
+
+var quit = 0
 
 var night_5_end := false
 
@@ -83,6 +88,17 @@ func _physics_process(delta):
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			save.save.Fullscreen = false
 			save.save_data()
+			
+	if Input.is_action_pressed("Exit"):
+		if quit == 0:
+			quit = 1
+			quit_text.visible = true
+			quit_timer.start()
+	if Input.is_action_just_released("Exit"):
+		quit = 0
+		quit_timer.stop()
+		quit_text.visible = false
+		quit_text.text = "Quitting"
 	
 	PlayerCamera.rotation_degrees.y = lerp(PlayerCamera.rotation_degrees.y, CameraRotation, 0.2)
 	
@@ -290,3 +306,12 @@ func game_over_screen():
 	game_over = true
 
 
+
+
+func _on_quit_timer_timeout():
+	if quit == 4:
+		get_tree().quit()
+	elif quit < 4:
+		quit_text.text = quit_text.text + "."
+		quit += 1
+		quit_timer.start()

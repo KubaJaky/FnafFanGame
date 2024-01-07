@@ -49,6 +49,7 @@ func _ready():
 	AudioServer.set_bus_volume_db(8, save.CutsceneVolume)
 	
 	DisplayServer.window_set_size(resolutions[save.ResolutionId])
+	DisplayServer.window_set_position(DisplayServer.screen_get_size()/8)
 	
 	if save.Fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)

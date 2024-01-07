@@ -42,8 +42,8 @@ func _process(delta):
 	if eyes_closed:
 		insanity -= 0.5
 		
-	if power_on:
-		power_left -= float(power_usage * (delta * 70))/(1000 - night_number*50)
+	if power_on:		# * 850 WAS 1000 EARLIER *
+		power_left -= float(power_usage * (delta * 70))/(850 - night_number*50)
 #	print("FPS %d" % Engine.get_frames_per_second())
 		
 	insanity = clamp(insanity,0,100)
